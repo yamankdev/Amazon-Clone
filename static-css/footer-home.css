@@ -1,0 +1,203 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+footer {
+  background-color: #6b6666;
+  width: 100%;
+  height: 700px;
+  margin-top: 299%;
+  /* background-color: #505050; */
+}
+.back-top {
+  width: 100%;
+  height: 48px;
+  background-color: #3b4b5b;
+}
+.back-top a {
+  display: inline-block;
+  text-decoration: none;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  width: 100%;
+  height: 48px;
+  font-size: 15px;
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+}
+.xtra-links {
+  width: 100%;
+  height: 375px;
+  background-color: #23303e;
+}
+.xtra-links .row {
+  display: flex;
+  width: 70%;
+  height: 50px;
+  margin: auto;
+  /* background-color: #624949; */
+}
+.xtra-links .row .col {
+  display: flex;
+  flex-direction: column;
+  column-gap: 90px;
+  /* margin: 50px 0 0 50px; */
+  margin: 45px 0 0 10px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 20px;
+  color: white;
+  /* background-color: #f34b4b; */
+}
+.xtra-links .row .col1 {
+  width: 110px;
+  margin-left: 45px;
+}
+.xtra-links .row .col2 {
+  width: 110px;
+  margin-left: 122px;
+}
+.xtra-links .row .col3 {
+  width: 190px;
+  margin-left: 125px;
+}
+.xtra-links .row .col4 {
+  width: 180px;
+  margin-left: 120px;
+}
+.xtra-links .row .col .headin {
+  font-size: 17.5px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  line-height: 17px;
+}
+.xtra-links .row .col a {
+  text-decoration: none;
+  color: rgb(232, 229, 229);
+  font-size: 16px;
+  line-height: 26.5px;
+}
+.xtra-links .row .col a:hover {
+  text-decoration: underline;
+}
+
+.lang-region {
+  display: flex;
+  margin-top: 0.6px;
+  background-color: #23303e;
+}
+.lang-region .logo {
+  width: 50%;
+  padding: 40px 0;
+  /* margin-top: 40px; */
+  /* background-color: #7c4949; */
+}
+.lang-region .logo img {
+  height: 25px;
+  width: 80px;
+  margin-left: 566px;
+}
+.lang-region .other {
+  padding: 24px 0;
+  width: 50%;
+  display: flex;
+}
+.lang-region .other .other-btn {
+  border: 1px solid rgb(159, 156, 156);
+  border-radius: 3px;
+  color: rgb(206, 203, 203);
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 15px;
+}
+.lang-region .other .lang {
+  margin-left: -29px;
+  height: 35px;
+  width: 118px;
+}
+.lang-region .other .lang .img1 {
+  height: 13px;
+  width: 13px;
+  margin: 9px 0 0 9px;
+}
+.lang-region .other .lang span {
+  margin: 7px 0 0 10px;
+}
+.lang-region .other .lang .img2 {
+  height: 13px;
+  width: 13px;
+  margin: 9px 0 0 23px;
+}
+.lang-region .other .region {
+  margin: 4.5px 0 0 7px;
+  height: 35px;
+  width: 90px;
+}
+.lang-region .other .region img {
+  height: 17px;
+  width: 20px;
+  margin: 8px 0 0 7px;
+}
+.lang-region .other .region span {
+  margin: -50px 0 0 4px;
+}
+.lang-region .other a {
+  text-decoration: none;
+}
+.lang-region .other.lang:hover .lang-drop-container {
+  visibility: visible;
+}
+
+.rights {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 270px;
+  background-color: #11161d;
+}
+.rights .more-links {
+  display: flex;
+}
+/* .rights .more-links .right-common {
+  display: flex;
+  flex-direction: column;
+  column-gap: 40px;
+  width: 20px;
+} */
+.rights .more-links .rights-common a {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+.rights .more-links p {
+  font-size: 13px;
+}
+.rights .more-links span {
+  font-weight: 100;
+}
+
+.rights .copy-rights {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 14px;
+  color: rgb(232, 229, 229);
+  line-height: 20px;
+  margin-top: 30px;
+}
+.rights .copy-rights .links {
+  display: flex;
+  column-gap: 20px;
+  padding: 0 565px;
+}
+.rights .more-links a,
+.rights .copy-rights .links a {
+  text-decoration: none;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 14px;
+  color: rgb(232, 229, 229);
+}
+.rights .more-links a:hover,
+.rights .copy-rights .links a:hover {
+  text-decoration: underline;
+}
