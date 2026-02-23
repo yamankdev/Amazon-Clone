@@ -9,7 +9,7 @@ body {
 section .hot-content {
   display: flex;
   justify-content: space-between;
-  width: 98%;
+  width: 99%;
   margin: auto;
   height: 80vh;
   background-image: url("./image/contentPage1.jpg");
@@ -19,9 +19,10 @@ section .hot-content {
 }
 section .fade-hot-content {
   position: absolute;
-  top: 13.7%;
-  left: 1%;
-  width: 98%;
+  top: 13.9%;
+  left: 0.5%;
+  width: 99%;
+  margin: auto;
   height: 80vh;
   background-image: linear-gradient(
     to bottom,
@@ -34,27 +35,27 @@ section .fade-hot-content:hover,
   cursor: pointer;
 }
 .hot-content .arrow {
-  height: 300px;
+  height: 15.5rem;
   z-index: 2;
   /* background-color: #dd6868; */
 }
 .hot-content .arrow:active {
   border: 3px solid blue;
-  border-radius: 2px;
-  box-shadow: 3px 3px 9px white;
+  border-radius: 0.125rem;
+  box-shadow: 0.125rem 0.125rem 0.625rem white;
 }
 .hot-content .arrow img {
-  height: 35px;
-  margin: 120px 25px 0 25px;
+  height: 2.25rem;
+  margin: 6rem 1.5rem 0 1.5rem;
 }
 
 section .content-area {
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 54.8%;
+  top: 50.5%;
   left: 0.6%;
-  row-gap: 20px;
+  row-gap: 1.25rem;
   width: 99%;
   height: 100%;
   z-index: 3;
@@ -63,95 +64,102 @@ section .content-area {
 .content-area .row-box4 {
   display: flex;
   justify-content: space-evenly;
-  height: 450px;
+  height: 28.125rem;
   width: 100%;
   /* background-color: #685b5b; */
 }
 .row-box4 .box {
-  height: 450px;
-  width: 350px;
-  box-shadow: 2px 2px 8px #666;
-  border-radius: 2px;
+  height: 28.125rem;
+  width: 21.875rem;
+  box-shadow: 0.125rem 0.125rem 0.5rem #666;
+  border-radius: 0.125rem;
   background-color: #fff;
 }
 .content-area .row-slide {
   display: flex;
   flex-direction: column;
-  height: 320px;
+  height: 20rem;
   width: 97.3%;
   margin: auto;
   background-color: white;
-  box-shadow: 2px 2px 8px #666;
+  box-shadow: 0.125rem 0.125rem 0.5rem #666;
   /* background-color: #650d0d; */
 }
 .row-slide p {
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: bold;
-  margin: 20px 20px 10px 25px;
+  margin: 1.25rem 1.25rem 0.625rem 1.5rem;
 }
 .row-slide .box-area {
   display: flex;
   justify-content: space-evenly;
 }
 .box-area .box {
-  height: 250px;
-  width: 260px;
-  box-shadow: 2px 2px 8px #666;
-  border-radius: 2px;
+  height: 15.625rem;
+  width: 16.25rem;
+  box-shadow: 0.125rem 0.125rem 0.5rem #666;
+  border-radius: 0.125rem;
   background-color: #d18484;
 }
 .content-area .row-slide-arrow {
   display: flex;
   justify-content: space-between;
   position: absolute;
-  height: 220px;
+  height: 19.9rem;
   width: 97.7%;
   /* background-color: #958f8f; */
 }
 .content-area .row3-arrow {
-  top: 137%;
+  top: 136.5%;
   left: 1.2%;
+  height: 19.1rem;
   /* background-color: #958f8f; */
 }
 .content-area .row4-arrow {
-  top: 181.5%;
+  top: 183.5%;
   left: 1.2%;
+  height: 19.1rem;
   /* background-color: #958f8f; */
 }
 .content-area .row6-arrow {
-  top: 290%;
+  top: 299%;
   left: 1.2%;
+  height: 19.1rem;
   /* background-color: #958f8f; */
 }
 .content-area .row7-arrow {
-  top: 334.5%;
+  top: 346%;
   left: 1.2%;
+  height: 19.1rem;
   /* background-color: #958f8f; */
 }
 .content-area .row9-arrow {
-  top: 443%;
+  top: 461.3%;
   left: 1.2%;
+  height: 19.1rem;
   /* background-color: #958f8f; */
 }
 .content-area .row10-arrow {
-  top: 487.3%;
+  top: 508%;
   left: 1.2%;
+  height: 19.1rem;
   /* background-color: #958f8f; */
 }
 .content-area .row12-arrow {
-  top: 596%;
+  top: 623%;
   left: 1.2%;
+  height: 19.1rem;
   /* background-color: #958f8f; */
 }
 .content-area .arrow {
-  height: 100px;
-  width: 56px;
-  margin: 55px 22px;
+  height: 6.25rem;
+  width: 3.5rem;
+  margin: 8rem 0 0 0;
   z-index: 2;
   visibility: hidden;
-  border-radius: 4px;
+  border-radius: 0.25rem;
   background-color: white;
-  box-shadow: 3px 3px 9px #505050;
+  box-shadow: 0.125rem 0.125rem 0.625rem #505050;
   /* transition: visibility 2s; */
 }
 .row-slide-arrow:hover .arrow {
@@ -160,19 +168,20 @@ section .content-area {
 }
 .content-area .arrow:active {
   border: 3px solid blue;
-  border-radius: 4px;
-  box-shadow: 3px 3px 9px white;
+  border-radius: 0.25rem;
+  box-shadow: 0.125rem 0.125rem 0.625rem white;
 }
 .content-area .arrow img {
-  height: 100px;
-  width: 50px;
+  height: 6.25rem;
+  width: 3.75rem;
 }
 
 .p-recommend {
   position: absolute;
-  height: 220px;
+  height: 13.5rem;
   width: 100%;
-  top: 686%;
+  top: 721%;
   background-color: white;
-  box-shadow: 3px 3px 9px #505050;
+  box-shadow: 0.125rem 0.125rem 0.625rem #505050;
+  /* background: #000; */
 }
