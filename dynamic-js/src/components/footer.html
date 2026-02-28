@@ -1,0 +1,372 @@
+<style type="text/tailwindcss">
+  @theme {
+    --bg-backtop: #3b4b5b;
+    --bg-xtralinks-lang: #23303e;
+    --bg-rights: #11161d;
+  }
+  .bg-backtop {
+    background-color: var(--bg-backtop);
+  }
+  .bg-xtralinks-lang {
+    background-color: var(--bg-xtralinks-lang);
+  }
+  .bg-rights {
+    background-color: var(--bg-rights);
+  }
+  @utility drop-container {
+    @apply flex flex-col absolute z-5 bg-white rounded-[2px] mt-[48px] py-[5px] shadow-xl after:absolute after:-ml-[5px] after:border-[10px] after:border-x-transparent;
+  }
+  @utility xtralink-style {
+    @apply text-[16px] text-gray-200 leading-[26.5px] decoration-1 hover:underline;
+  }
+  @utility lang-label {
+    @apply text-[14px] text-gray-800 px-[5px] -mt-[3px] hover:text-red-600 hover:cursor-pointer;
+  }
+</style>
+
+<!-- back-top -->
+<div class="w-[100%] h-[48px] bg-backtop">
+  <a
+    class="decoration-none inline-block w-[100%] h-[48px] text-[14.5px] text-white font-fam text-center py-[12px]"
+    href="#"
+    >Back to top</a
+  >
+</div>
+<!-- xtra-links -->
+<div class="w-[100%] h-[375px] bg-xtralinks-lang">
+  <!-- row -->
+  <div class="flex w-[70%] h-[50px] m-auto">
+    <!-- col col1 -->
+    <div
+      class="flex flex-col gap-x-[90px] mt-[45px] font-fam text-white w-[110px] ml-[43px]"
+    >
+      <!-- headin -->
+      <span class="text-[17.5px] font-bold leading-[17px] mb-[12px]"
+        >Get to Know Us</span
+      >
+      <a
+        class="links text-[16px] text-gray-200 leading-[26.5px] decoration-1 hover:underline"
+        href=""
+        >About Amazon</a
+      >
+      <a class="decoration-none xtralink-style" href="">Careers</a>
+      <a class="decoration-none xtralink-style" href="">Press Releases</a>
+      <a class="decoration-none xtralink-style" href="">Amazon Science</a>
+    </div>
+    <!-- col col2 -->
+    <div
+      class="flex flex-col gap-x-[90px] mt-[45px] font-fam text-white w-[110px] ml-[120px]"
+    >
+      <!-- headin -->
+      <span class="text-[17.5px] font-bold leading-[17px] mb-[12px]"
+        >Connect with Us</span
+      >
+      <a class="decoration-none xtralink-style" href="">Facebook</a>
+      <a class="decoration-none xtralink-style" href="">Twitter</a>
+      <a class="decoration-none xtralink-style" href="">Instagram</a>
+    </div>
+    <!-- col col3 -->
+    <div
+      class="flex flex-col gap-x-[90px] mt-[45px] font-fam text-white w-[190px] ml-[130px]"
+    >
+      <!-- headin -->
+      <span class="text-[17.5px] font-bold leading-[17px] mb-[12px]"
+        >Make Money with Us</span
+      >
+      <a class="decoration-none mb-[5px] xtralink-style" href=""
+        >Sell on Amazon
+      </a>
+      <a class="decoration-none leading-[17px] mb-[5px] xtralink-style" href="">
+        Sell under Amazon Accelerator
+      </a>
+      <a class="decoration-none xtralink-style" href="">
+        Protect and Build Your Brand
+      </a>
+      <a class="decoration-none xtralink-style" href="">
+        Amazon Global Selling
+      </a>
+      <a class="decoration-none xtralink-style" href=""> Supply to Amazon </a>
+      <a class="decoration-none xtralink-style" href="">
+        Become an Affiliate
+      </a>
+      <a class="decoration-none xtralink-style" href="">
+        Fulfillment by Amazon
+      </a>
+      <a class="decoration-none xtralink-style" href="">
+        Advertise Your Products
+      </a>
+      <a class="decoration-none xtralink-style" href="">
+        Amazon Pay on Merchants
+      </a>
+    </div>
+    <!-- col col4 -->
+    <div
+      class="flex flex-col gap-x-[90px] mt-[45px] font-fam text-white w-[180px] ml-[120px]"
+    >
+      <!-- headin -->
+      <span class="text-[17.5px] font-bold leading-[17px] mb-[12px]"
+        >Let Us Help You</span
+      >
+      <a class="decoration-none xtralink-style" href="">Your Account</a>
+      <a class="decoration-none mb-[5px] xtralink-style" href="">
+        Returns Centre
+      </a>
+      <a class="decoration-none leading-[17px] mb-[5px] xtralink-style" href="">
+        Recalls and Product Safety Alerts
+      </a>
+      <a class="decoration-none xtralink-style" href="">
+        100% Purchase Protection
+      </a>
+      <a class="decoration-none xtralink-style" href="">
+        Amazon App Download
+      </a>
+      <a class="decoration-none xtralink-style" href="">Help</a>
+    </div>
+  </div>
+</div>
+<hr class="text-gray-600" />
+<!-- lang-region -->
+<div class="flex bg-xtralinks-lang">
+  <!-- logo -->
+  <div class="w-[50%] py-[40px]">
+    <a href="">
+      <img
+        class="h-[25px] w-[80px] ml-[566px]"
+        src="./image/amazonLogo.png"
+        alt="logo-png"
+      />
+    </a>
+  </div>
+  <!-- other -->
+  <div class="flex w-[50%] py-[24px]">
+    <!-- other-btn lang -->
+    <div
+      class="border border-gray-400 rounded-[3px] w-[118px] h-[35px] -ml-[28px] relative group mt-[3.5px]"
+    >
+      <a class="decoration-none flex font-fam w-[118px] h-[35px]" href="">
+        <img
+          class="size-[13px] mt-[9px] ml-[9px]"
+          src="./image/icons/global.svg"
+          alt="globe-icon"
+        />
+        <span class="text-[15px] text-gray-300 mt-[5px] ml-[10px]"
+          >English</span
+        >
+        <img
+          class="size-[10px] mt-[12px] ml-[23px]"
+          src="./image/icons/select-arrows.svg"
+          alt="select-arrow-icon"
+        />
+        <!-- lang-drop-container -->
+        <div
+          class="drop-container after:border-t-transparent after:border-b-white w-[250px] -top-[45%] -left-[0%] after:bottom-[100%] after:left-[41%] invisible group-hover:visible"
+        >
+          <a
+            href=""
+            class="decoration-none flex px-[20px] py-[10px] -mt-[30px] hover:text-red-600 hover:underline"
+          >
+            <input
+              class="size-[15px] text-red-600"
+              type="radio"
+              id="EN2"
+              value="English"
+              name="language"
+              checked
+            />
+            <label class="lang-label" for="EN2">English - EN</label>
+          </a>
+          <hr class="text-gray-200" />
+          <a
+            href=""
+            class="decoration-none flex px-[20px] pt-[10px] py-[5px] hover:text-red-600 hover:underline"
+          >
+            <input
+              class="size-[15px] hover:bg-red-500"
+              type="radio"
+              id="HI2"
+              value="Hindi"
+              name="language"
+            />
+            <label class="lang-label" for="HI2">हिन्दी - HI</label>
+          </a>
+          <a
+            href=""
+            class="decoration-none flex px-[20px] py-[5px] hover:text-red-600 hover:underline"
+          >
+            <input
+              class="size-[15px] text-red-600 focus:ring-red-600"
+              type="radio"
+              id="TA2"
+              value="Tamil"
+              name="language"
+            />
+            <label class="lang-label" for="TA2">தமிழ் - TA</label>
+          </a>
+          <a
+            href=""
+            class="decoration-none flex px-[20px] py-[5px] hover:text-red-600 hover:underline"
+          >
+            <input
+              class="size-[15px] hover:bg-red-500"
+              type="radio"
+              id="TE2"
+              value="Telugu"
+              name="language"
+            />
+            <label class="lang-label" for="TE2">తెలుగు - TE</label>
+          </a>
+          <a
+            href=""
+            class="decoration-none flex px-[20px] py-[5px] hover:text-red-600 hover:underline"
+          >
+            <input
+              class="size-[15px] hover:bg-red-500"
+              type="radio"
+              id="KN2"
+              value="Kannad"
+              name="language"
+            />
+            <label class="lang-label" for="KN2">ಕನ್ನಡ - KN</label>
+          </a>
+          <a
+            href=""
+            class="decoration-none flex px-[20px] py-[5px] hover:text-red-600 hover:underline"
+          >
+            <input
+              class="size-[15px] hover:bg-red-500"
+              type="radio"
+              id="ML2"
+              value="Malayalam"
+              name="language"
+            />
+            <label class="lang-label" for="ML2">മലയാളം - ML</label>
+          </a>
+          <a
+            href=""
+            class="decoration-none flex px-[20px] py-[5px] hover:text-red-600 hover:underline"
+          >
+            <input
+              class="size-[15px] hover:bg-red-500"
+              type="radio"
+              id="BE2"
+              value="Bengla"
+              name="language"
+            />
+            <label class="lang-label" for="BE2">বাংলা - BN</label>
+          </a>
+          <a
+            href=""
+            class="decoration-none flex px-[20px] py-[5px] hover:text-red-600"
+          >
+            <input
+              class="size-[15px] hover:bg-red-500"
+              type="radio"
+              id="MR2"
+              value="Marathi"
+              name="language"
+            />
+            <label class="lang-label" for="MR2">मराठी - MR</label>
+          </a>
+          <a
+            href=""
+            class="decoration-none text-[14px] px-[40px] pt-[10px] pb-[13px] text-blue-800 hover:underline"
+            >Learn more</a
+          >
+        </div>
+      </a>
+    </div>
+    <!-- other-btn region -->
+    <a
+      class="decoration-none flex border border-gray-400 rounded-[3px] font-fam text-gray-200 w-[90px] h-[35px] mt-[3px] ml-[7px]"
+      href=""
+    >
+      <img
+        class="w-[20px] h-[17px] mt-[8px] ml-[7px]"
+        class="img1"
+        src="./image/icons/flag.svg"
+        alt="flag-icon"
+      />
+      <span class="text-[15px] text-gray-300 mt-[5px] ml-[6px]">India</span>
+    </a>
+  </div>
+</div>
+<!-- rights -->
+<div class="flex flex-col w-[100%] h-[260px] bg-rights">
+  <!-- more-links -->
+  <div class="flex">
+    <!-- col1 rights-common -->
+    <div class="pt-[27px] pl-[270px]">
+      <a class="flex flex-col mb-[15px] mt-[6px] leading-[13px]" href="">
+        <p class="text-[12px] text-white">AbeBooks</p>
+        <p class="text-[12px] text-gray-400">Books, art</p>
+        <p class="text-[12px] text-gray-400">& collectibles</p>
+      </a>
+      <a class="flex flex-col mb-[15px] leading-[13px]" href="">
+        <p class="text-[12px] text-white">Shopbop</p>
+        <p class="text-[12px] text-gray-400">Designer</p>
+        <p class="text-[12px] text-gray-400">Fashion Brands</p>
+      </a>
+    </div>
+    <!-- col2 rights-common -->
+    <div class="pt-[27px] pl-[110px]">
+      <a class="flex flex-col mb-[15px] mt-[6px] leading-[13px]" href="">
+        <p class="text-[12px] text-white">Amazon Web Services</p>
+        <p class="text-[12px] text-gray-400">Scalable Cloud</p>
+        <p class="text-[12px] text-gray-400">Computing Services</p>
+      </a>
+      <a class="flex flex-col mb-[15px] leading-[13px]" href="">
+        <p class="text-[12px] text-white">Amazon Business</p>
+        <p class="text-[12px] text-gray-400">Everything For</p>
+        <p class="text-[12px] text-gray-400">Your Business</p>
+      </a>
+    </div>
+    <!-- col3 rights-common -->
+    <div class="pt-[27px] pl-[70px] ml-[3px]">
+      <a class="flex flex-col mb-[15px] mt-[6px] leading-[13px]" href="">
+        <p class="text-[12px] text-white">Audible</p>
+        <p class="text-[12px] text-gray-400">Download</p>
+        <p class="text-[12px] text-gray-400">Audio Books</p>
+      </a>
+      <a class="flex flex-col mb-[15px] leading-[13px]" href="">
+        <p class="text-[12px] text-white">Prime Now</p>
+        <p class="text-[12px] text-gray-400">2-Hour Delivery</p>
+        <p class="text-[12px] text-gray-400">on Everyday Items</p>
+      </a>
+    </div>
+    <!-- col4 rights-common -->
+    <div class="pt-[27px] pl-[94px]">
+      <a class="flex flex-col mb-[15px] mt-[6px] leading-[13px]" href="">
+        <p class="text-[12px] text-white">IMDb</p>
+        <p class="text-[12px] text-gray-400">Movies, TV</p>
+        <p class="text-[12px] text-gray-400">& Celebrities</p>
+      </a>
+      <a class="flex flex-col mb-[15px] leading-[13px]" href="">
+        <p class="text-[12px] text-white">Amazon Prime Music</p>
+        <p class="text-[12px] text-gray-400">100 million Songs, ad-</p>
+        <p class="text-[12px] text-gray-400">free</p>
+        <p class="text-[12px] text-gray-400">Over 15 million podcast</p>
+        <p class="text-[12px] text-gray-400">episodes</p>
+      </a>
+    </div>
+  </div>
+  <!-- copy-rights -->
+  <div
+    class="flex flex-col text-[14px] text-center text-gray-50 font-fam leading-[20px] mt-[25px]"
+  >
+    <!-- links -->
+    <div class="flex gap-x-[15px] ml-[595px] text-[13.5px]">
+      <a class="decoration-none font-fam text-gray-50 hover:underline" href=""
+        >Conditions of Use & Sale</a
+      >
+      <a class="decoration-none font-fam text-gray-50 hover:underline" href=""
+        >Privacy Notice</a
+      >
+      <a class="decoration-none font-fam text-gray-50 hover:underline" href=""
+        >Interest-Based-Ads</a
+      >
+    </div>
+    <span class="font-fam text-[13.5px] text-gray-50 -mt-[2px]"
+      >&copy 1996-2025, Amazon.com, Inc. or its affiliates</span
+    >
+  </div>
+</div>

@@ -1,0 +1,3043 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Amazon-js</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <!-- <link href="./src/output.css" rel="stylesheet"> -->
+    <style type="text/tailwindcss">
+      * {
+        @apply box-border;
+      }
+      @theme {
+        --font-arial: "Arial", sans-serif;
+        --color-navbar1: #131921;
+        --color-navbar2: #232f3e;
+        --color-allHeader: #232f3e;
+      }
+      .font-fam {
+        font-family: var(--font-fam);
+      }
+
+      @utility select {
+        @apply ml-[5px] hover:border hover:border-white hover:rounded-[0.125rem] hover:cursor-pointer;
+      }
+      @utility drop-container {
+        @apply flex flex-col absolute z-2 bg-white rounded-[0.125rem] mt-[48px] py-[5px] shadow-xl ease-in  after:absolute after:-ml-[5px] after:border-[10px] after:border-x-transparent;
+      }
+      @utility all-drop-container {
+        @apply flex flex-col absolute z-4 bg-white rounded-[0.125rem] py-[5px] -top-[0.05%] shadow-xl duration-400 ease-in-out;
+      }
+
+      /* Hero Section */
+      @utility hero-imgs {
+        @apply min-w-[100%] duration-500 ease-in-out;
+      }
+      @utility hero-btn {
+        @apply h-[15.5rem] z-2 hover:cursor-pointer active:border active:border-[0.125rem] active:border-blue-600 active:rounded-[0.125rem] active:outline-[0.125rem] active:outline-white;
+      }
+
+      /* Content Section  */
+      @utility box4-row {
+        @apply flex justify-evenly h-[28.125rem] w-[98%] mx-auto;
+      }
+      @utility box4-box {
+        @apply flex flex-col h-[26.25rem] w-[21.875rem] rounded-[0.125rem] p-5 bg-white shadow-black;
+      }
+      @utility box4-signIn {
+        @apply flex flex-col h-[9.375rem] w-[21.875rem] rounded-[0.125rem] p-5 bg-white shadow-black;
+      }
+      @utility box5-row {
+        @apply flex flex-col h-[18.125rem] w-[97%] m-auto bg-white inset-shadow-black;
+      }
+      @utility box5-box {
+        @apply h-[15.625rem] w-[16.25rem] rounded-[0.125rem] bg-gray-300 shadow-black;
+      }
+      @utility slide-row3-box {
+        @apply flex gap-x-[10px] duration-600 ease-in-out;
+      }
+      @utility slide-row4-box {
+        @apply flex gap-x-[10px] duration-600 ease-in-out;
+      }
+      @utility slide-row6-box {
+        @apply flex gap-x-[10px] duration-600 ease-in-out;
+      }
+      @utility slide-row7-box {
+        @apply flex gap-x-[10px] duration-600 ease-in-out;
+      }
+      @utility slide-row9-box {
+        @apply flex gap-x-[10px] duration-600 ease-in-out;
+      }
+      @utility slide-row11-box {
+        @apply flex gap-x-[10px] duration-600 ease-in-out;
+      }
+      @utility slide-arrow-L {
+        @apply h-[100px] w-[45px] mx-[0.9rem] my-[55px] z-2 rounded-[0.125rem] bg-gray-100/70 shadow-black active:border active:border-[3px] active:border-blue-600 active:rounded-[4px] shadow-white invisible group-hover:visible;
+      }
+      @utility slide-arrow-R {
+        @apply h-[100px] w-[45px] mx-[20.125rem] my-[55px] z-2 rounded-[0.125rem] bg-gray-100/70 shadow-black active:border active:border-[3px] active:border-blue-600 active:rounded-[4px] shadow-white invisible group-hover:visible;
+      }
+
+      @utility overlay {
+        @apply absolute w-[100%] h-[100%] bg-black/50 top-[14%];
+      }
+    </style>
+  </head>
+  <body class="h-[100%] bg-gray-200 overflow-x-hidden"> 
+    <!-- Navbar1 -->
+    <header id="navbar1" class="w-[100%] h-[60px]">
+      <div class="flex fixed top-0 z-3 w-[100%] font-fam bg-navbar1">
+        <!-- Left-Section -->
+        <div class="leftNav flex w-[360px] py-[3px]">
+          <!-- HomeLogo -->
+          <div class="select h-[3.125rem] w-[130px] px-[8px] ml-[10px]">
+            <a class="decoration-none flex" id="home" href="#" target="_self">
+              <div class="h-[3.125rem] w-[98px]">
+                <img
+                  class="h-[30px] my-[14px]"
+                  src="./image/amazonLogo.png"
+                  alt="Logo"
+                />
+              </div>
+              <span class="w-[15px] text-[15px] text-white ml-[1px] my-[15px]"
+                >.in</span
+              >
+            </a>
+          </div>
+          <!-- Address -->
+          <div class="addr select h-[3.125rem] w-[215px] px-[6px]">
+            <!-- <a class="decoration-none" href=""> -->
+              <div class="flex">
+                <div class="h-[3.125rem] w-[1.25rem]">
+                  <img
+                    class="size-[30px] mt-[15px]"
+                    src="./image/icons/location.svg"
+                    alt="locationPin"
+                  />
+                </div>
+                <div class="flex flex-col leading-[13.5px] mt-[14px]">
+                  <span class="text-[0.75rem] text-gray-300">
+                    Delivering to Hyderabad 500043
+                  </span>
+                  <span class="text-[0.9rem] text-white font-bold">
+                    Update location
+                  </span>
+                </div>
+              </div>
+            <!-- </a> -->
+          </div>
+        </div>
+        <!-- Middle-Section -->
+        <div
+          class="search flex w-[738px] h-[2.5rem] ml-[1rem] my-[10px] outline-[3px] rounded-[5px]"
+        >
+          <!-- Search-Drop -->
+          <div class="search-drop h-[2.5rem] rounded-l-[5px]">
+            <select
+              class="h-[100%] field-sizing-content min-w-[3.125rem] text-[0.9rem] text-gray-600 bg-gray-200 rounded-l-[5px] hover:cursor-pointer hover:bg-gray-300 hover:text-gray-900 outline-transparent"
+              name="opt"
+              id="opt"
+            >
+              <option class="bg-white" value="all" selected>All</option>
+              <option class="bg-white" value="a-skills">Alexa Skills</option>
+              <option class="bg-white" value="a-device">Amazon Devices</option>
+              <option class="bg-white" value="a-fashion">Amazon Fashion</option>
+              <option class="bg-white" value="a-fresh">Amazon Fresh</option>
+              <option class="bg-white" value="a-meat">Amazon Fresh Meat</option>
+              <option class="bg-white" value="a-pharma">Amazon Pharmacy</option>
+              <option class="bg-white" value="appliance">Appliance</option>
+              <option class="bg-white" value="apps-books">Apps & Books</option>
+              <option class="bg-white" value="audio-books">
+                Audible & Audiobooks
+              </option>
+              <option class="bg-white" value="baby">Baby</option>
+              <option class="bg-white" value="beauty">Beauty</option>
+              <option class="bg-white" value="books">Books</option>
+              <option class="bg-white" value="cars-bike">
+                Car & Motorbikes
+              </option>
+              <option class="bg-white" value="cloths-accessories">
+                Clothing & Accessories
+              </option>
+              <option class="bg-white" value="collectibles">
+                Collectibles
+              </option>
+              <option class="bg-white" value="comp-accessories">
+                Computers & Accessories
+              </option>
+              <option class="bg-white" value="deals">Deals</option>
+              <option class="bg-white" value="electronics">Electronics</option>
+              <option class="bg-white" value="furniture">Furniture</option>
+              <option class="bg-white" value="garden-outdoor">
+                Garden & Outdoors
+              </option>
+              <option class="bg-white" value="gift-cards">Gift Cards</option>
+              <option class="bg-white" value="grocery">
+                Grocery & Gourmet Foods
+              </option>
+              <option class="bg-white" value="health">
+                Health & Personal Care
+              </option>
+              <option class="bg-white" value="home-kitchen">
+                Home & Kitchen
+              </option>
+              <option class="bg-white" value="industrial-science">
+                Industrial & Scientific
+              </option>
+              <option class="bg-white" value="jewellery">Jewellery</option>
+              <option class="bg-white" value="kindle">Kindle Store</option>
+              <option class="bg-white" value="luggage">Luggage & Bags</option>
+              <option class="bg-white" value="luxury">Luxury Beauty</option>
+              <option class="bg-white" value="Shows">Movies & TV Shows</option>
+              <option class="bg-white" value="mp3">MP3 Music</option>
+              <option class="bg-white" value="music">Music</option>
+              <option class="bg-white" value="music-Instrument">
+                Musical Instruments
+              </option>
+              <option class="bg-white" value="office-product">
+                Office Products
+              </option>
+              <option class="bg-white" value="pet">Pet Supplies</option>
+              <option class="bg-white" value="prime">Prime Video</option>
+              <option class="bg-white" value="shoes">Shoes & Handbags</option>
+              <option class="bg-white" value="software">Softwares</option>
+              <option class="bg-white" value="sport">
+                Sports, Fitness & Outdoors
+              </option>
+              <option class="bg-white" value="subscribe">
+                Subscribe & Save
+              </option>
+              <option class="bg-white text-[16px]" value="tools">
+                Tools & Home Improvement
+              </option>
+              <option class="bg-white" value="toys">Toys & Games</option>
+              <option class="bg-white" value="under-500">
+                Under <span>&#8377;</span>500
+              </option>
+              <option class="bg-white" value="video">Video Games</option>
+              <option class="bg-white" value="watches">Watches</option>
+            </select>
+          </div>
+          <!-- Search-Input-->
+          <div class="h-[100%] w-[100%]">
+            <input
+              id="search-ip"
+              class="h-[2.5rem] w-[100%] bg-white outline-transparent"
+              type="text"
+              placeholder="  Search Amazon.in"
+            />
+          </div>
+          <!-- Search-Button  -mr-[1.25rem]-->
+          <div class="h-[100%] w-[45px] rounded-r-[5px]">
+            <button
+              class="w-[45px] py-[6px] px-[8px] rounded-r-[5px] bg-orange-300 hover:cursor-pointer hover:bg-orange-400"
+              href="#"
+            >
+              <img
+                class="size-[28px]"
+                src="./image/icons/search.svg"
+                alt="search"
+              />
+            </button>
+          </div>
+        </div>
+        <!-- Right-Section -->
+        <div class="rightNav flex w-[410px] py-[5px]">
+          <!-- Select-Language -->
+          <div
+            class="select-lang select h-[3.125rem] w-[73px] px-[6px] ml-[15px] relative"
+          >
+            <a class="flex decoration-none" href="">
+              <div class="flex">
+                <!-- Flag -->
+                <div class="h-[2.75rem] w-[25px] ml-[3px]">
+                  <img
+                    class="h-[1.25rem] my-[1.125rem]"
+                    src="./image/icons/flag.svg"
+                    alt="flag"
+                  />
+                </div>
+                <!-- Lang-Code -->
+                <span class="text-[0.9rem] text-white font-bold mt-[1.125rem]"
+                  >EN</span
+                >
+                <!-- Dropdown-arrow -->
+                <div class="h-[3.125rem] w-[1.5rem]">
+                  <img
+                    class="h-[1.125rem] mt-[21px] -ml-[0.125rem]"
+                    src="./image/icons/drop-down.svg"
+                    alt="drop-down"
+                  />
+                </div>
+              </div>
+              <!-- Language-Drop-Container -->
+              <div
+                class="lang-drop1 drop-container after:border-t-transparent after:border-b-white w-[16rem] -top-[2%] -left-[5%] after:bottom-[100%] after:left-[23.5%] invisible transition delay-300 duration-300 ease-in-out"
+              >
+                <a
+                  href=""
+                  class="decoration-none flex px-[1.25rem] py-[10px] hover:text-red-600 hover:underline"
+                >
+                  <input
+                    class="size-[15px] bg-red-600"
+                    type="radio"
+                    id="EN"
+                    value="English"
+                    name="language1"
+                    checked
+                  />
+                  <label class="lang-label" for="EN">English - EN</label>
+                </a>
+                <hr class="text-gray-200" />
+                <a
+                  href=""
+                  class="decoration-none flex px-[1.25rem] pt-[15px] py-[5px] hover:text-red-600 hover:underline"
+                >
+                  <input
+                    class="size-[15px] hover:bg-red-500"
+                    type="radio"
+                    id="HI"
+                    value="Hindi"
+                    name="language1"
+                  />
+                  <label class="lang-label" for="HI">हिन्दी - HI</label>
+                </a>
+                <a
+                  href=""
+                  class="decoration-none flex px-[1.25rem] py-[5px] hover:text-red-600 hover:underline"
+                >
+                  <input
+                    class="size-[15px] text-red-600 focus:ring-red-600"
+                    type="radio"
+                    id="TA"
+                    value="Tamil"
+                    name="language1"
+                  />
+                  <label class="lang-label" for="TA">தமிழ் - TA</label>
+                </a>
+                <a
+                  href=""
+                  class="decoration-none flex px-[1.25rem] py-[5px] hover:text-red-600 hover:underline"
+                >
+                  <input
+                    class="size-[15px] hover:bg-red-500"
+                    type="radio"
+                    id="TE"
+                    value="Telugu"
+                    name="language1"
+                  />
+                  <label class="lang-label" for="TE">తెలుగు - TE</label>
+                </a>
+                <a
+                  href=""
+                  class="decoration-none flex px-[1.25rem] py-[5px] hover:text-red-600 hover:underline"
+                >
+                  <input
+                    class="size-[15px] hover:bg-red-500"
+                    type="radio"
+                    id="KN"
+                    value="Kannad"
+                    name="language1"
+                  />
+                  <label class="lang-label" for="KN">ಕನ್ನಡ - KN</label>
+                </a>
+                <a
+                  href=""
+                  class="decoration-none flex px-[1.25rem] py-[5px] hover:text-red-600 hover:underline"
+                >
+                  <input
+                    class="size-[15px] hover:bg-red-500"
+                    type="radio"
+                    id="ML"
+                    value="Malayalam"
+                    name="language1"
+                  />
+                  <label class="lang-label" for="ML">മലയാളം - ML</label>
+                </a>
+                <a
+                  href=""
+                  class="decoration-none flex px-[1.25rem] py-[5px] hover:text-red-600 hover:underline"
+                >
+                  <input
+                    class="size-[15px] hover:bg-red-500"
+                    type="radio"
+                    id="BE"
+                    value="Bangla"
+                    name="language1"
+                  />
+                  <label class="lang-label" for="BE">বাংলা - BN</label>
+                </a>
+                <a
+                  href=""
+                  class="decoration-none flex px-[1.25rem] py-[5px] hover:text-red-600"
+                >
+                  <input
+                    class="size-[15px] hover:bg-red-500"
+                    type="radio"
+                    id="MR"
+                    value="Marathi"
+                    name="language1"
+                  />
+                  <label class="lang-label" for="MR">मराठी - MR</label>
+                </a>
+                <a
+                  href=""
+                  class="decoration-none text-[14px] px-[2.5rem] pt-[10px] pb-[5px] text-blue-800 hover:underline"
+                  >Learn more</a
+                >
+                <hr class="text-gray-300 mt-[5px]" />
+                <div class="flex px-[1.25rem] py-[6px] mt-[3px]">
+                  <img
+                    class="size-[16px] mt-[3px]"
+                    src="./image/icons/flag.svg"
+                    alt="region-flag"
+                  />
+                  <span class="text-[14px] px-[5px]">
+                    You are shopping on Amazon.in
+                  </span>
+                </div>
+                <a
+                  href=""
+                  class="decoration-none text-[13.5px] px-[2.5rem] text-blue-700 hover:underline"
+                  >Change country/region</a
+                >
+              </div>
+            </a>
+          </div>
+          <!-- Account -->
+          <div class="select-accnt select h-[3.125rem] w-[8.5rem] px-[4px] relative">
+            <a class="decoration-none" href="">
+              <div class="flex">
+                <!-- Text -->
+                <div
+                  class="flex flex-col h-[3.125rem] w-[130px] ml-[4px] text-white leading-[13.5px]"
+                >
+                  <span class="text-[0.75rem] mt-[14px]">Hello, sign in</span>
+                  <span class="text-[0.9rem] font-bold">Account & Lists</span>
+                </div>
+                <!-- Dropdown-arrow -->
+                <div class="h-[3.125rem] w-[1.25rem]">
+                  <img
+                    class="h-[1.125rem] mt-[23px] -ml-[0.125rem]"
+                    src="./image/icons/drop-down.svg"
+                    alt="drop-down"
+                  />
+                </div>
+              </div>
+            </a>
+            <!-- drop-container accnt-drop-container -->
+            <div
+              class="accnt-drop1 drop-container after:border-t-transparent after:border-b-white w-[490px] -top-[3%] -left-[184%] after:bottom-[100%] after:left-[74.1%] invisible"
+            >
+              <!-- inner-sign-in -->
+              <div class="flex flex-col text-center font-fam">
+                <!-- sign-in-btn -->
+                <a
+                  href=""
+                  class="text-[14px] w-[230px] mx-[135px] mt-[10px] py-[8px] rounded-[8px] bg-yellow-300 hover:underline"
+                  >Sign in</a
+                >
+                <span class="text-[11px] py-[5px]">
+                  New customer?
+                  <a class="text-blue-700 underline hover:text-red-700" href=""
+                    >Start here</a
+                  >
+                </span>
+                <hr class="text-gray-200" />
+              </div>
+              <!-- inner-content-->
+              <div class="flex my-[10px]">
+                <!-- sign-in-col1 -->
+                <div class="flex flex-col w-[190px] ml-[25px]">
+                  <span class="text-[1.125rem] font-bold mb-[8px]">
+                    Your Lists
+                  </span>
+                  <a
+                    class="decoration-none text-[14.5px] text-gray-600 py-[3px] hover:text-red-500 hover:underline"
+                    href=""
+                    >Create a Wish List</a
+                  >
+                  <a
+                    class="decoration-none text-[14.5px] text-gray-600 py-[3px] hover:text-red-500 hover:underline"
+                    href=""
+                    >Wish from Any Website</a
+                  >
+                  <a
+                    class="decoration-none text-[14.5px] text-gray-600 py-[3px] hover:text-red-500 hover:underline"
+                    href=""
+                    >Baby Wishlist</a
+                  >
+                  <a
+                    class="decoration-none text-[14.5px] text-gray-600 py-[3px] hover:text-red-500 hover:underline"
+                    href=""
+                    >Discover Your Style</a
+                  >
+                  <a
+                    class="decoration-none text-[14.5px] text-gray-600 py-[3px] hover:text-red-500 hover:underline"
+                    href=""
+                    >Explore Showroom</a
+                  >
+                </div>
+                <!-- sign-in-col2 -->
+                <div class="flex flex-col mr-[1.25rem] ml-[70px]">
+                  <span class="text-[1.125rem] font-bold mb-[8px]">
+                    Your Account
+                  </span>
+                  <a
+                    class="decoration-none text-[14.5px] text-gray-600 py-[3px] hover:text-red-500 hover:underline"
+                    href=""
+                    >Your Account</a
+                  >
+                  <a
+                    class="decoration-none text-[14.5px] text-gray-600 py-[3px] hover:text-red-500 hover:underline"
+                    href=""
+                    >Your Orders</a
+                  >
+                  <a
+                    class="decoration-none text-[14.5px] text-gray-600 py-[3px] hover:text-red-500 hover:underline"
+                    href=""
+                    >Your Wish List</a
+                  >
+                  <a
+                    class="decoration-none text-[14.5px] text-gray-600 py-[3px] hover:text-red-500 hover:underline"
+                    href=""
+                    >Your Recommendations</a
+                  >
+                  <a
+                    class="decoration-none text-[14.5px] text-gray-600 py-[3px] hover:text-red-500 hover:underline"
+                    href=""
+                    >Your Prime Membership</a
+                  >
+                  <a
+                    class="decoration-none text-[14.5px] text-gray-600 py-[3px] hover:text-red-500 hover:underline"
+                    href=""
+                    >Your Prime Video</a
+                  >
+                  <a
+                    class="decoration-none text-[14.5px] text-gray-600 py-[3px] hover:text-red-500 hover:underline"
+                    href=""
+                    >Your Subscribe and Saved Items</a
+                  >
+                  <a
+                    class="decoration-none text-[14.5px] text-gray-600 py-[3px] hover:text-red-500 hover:underline"
+                    href=""
+                    >Memberships and Subscriptions</a
+                  >
+                  <a
+                    class="decoration-none text-[14.5px] text-gray-600 py-[3px] hover:text-red-500 hover:underline"
+                    href=""
+                    >Your Seller Account</a
+                  >
+                  <a
+                    class="decoration-none text-[14.5px] text-gray-600 py-[3px] leading-[15px] mr-[10px] hover:text-red-500 hover:underline"
+                    href=""
+                    >Manage Your Content and Devices</a
+                  >
+                  <a
+                    class="decoration-none text-[14.5px] text-gray-600 py-[3px] leading-[15px] mr-[10px] hover:text-red-500 hover:underline"
+                    href=""
+                    >Register for a Free Business Account</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Orders -->
+          <div class="select h-[3.125rem] w-[73px] px-[4px]">
+            <a class="decoration-none" href="">
+              <!-- Text -->
+              <div
+                class="flex flex-col h-[3.125rem] w-[70px] text-white leading-[13.5px]"
+              >
+                <span class="text-[0.75rem] mt-[14px]">Returns</span>
+                <span class="text-[0.9rem] font-bold">& Orders</span>
+              </div>
+            </a>
+          </div>
+          <!-- Cart -->
+          <div class="select h-[3.125rem] w-[80px] px-[4px]">
+            <a class="decoration-none" href="">
+              <div class="flex text-white">
+                <!-- Cart-Image -->
+                <div class="flex flex-col h-[3.125rem] w-[45px]">
+                  <img
+                    class="size-[3rem] mt-[0.375rem]"
+                    src="./image/icons/cart.svg"
+                    alt="cart"
+                  />
+                  <span
+                    class="text-[1.125rem] font-fam font-bold text-orange-400 -mt-[3.125rem] ml-[16px]"
+                  >
+                    0
+                  </span>
+                </div>
+                <!-- Text -->
+                <span class="text-[0.9rem] font-fam font-bold mt-[24px]">
+                  Cart
+                </span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navbar2 -->
+    <header id="navbar2" class="h-[35px] w-[100%] bg-navbar2">
+      <div class="flex h-[100%] w-[100%] font-fam">
+        <!-- all -->
+        <div
+          class="all-container select h-[35px] w-[55px] px-[6px] ml-[10px] relative shrink-0"
+        >
+          <!-- <a class="decoration-none flex" href=""> -->
+          <div class="flex">
+            <div class="h-[35px] w-[25px] mt-[5px]">
+              <img
+                class="size-[23px]"
+                src="./image/icons/menu.svg"
+                alt="menu"
+              />
+            </div>
+            <span class="text-[0.9rem] text-white font-bold my-[6px]">All</span>
+          </div>
+          <!-- </a> -->
+        </div>
+        <!-- fresh -->
+        <div
+          class="fresh select h-[35px] w-[4.2rem] ml-[1px] px-[4px] relative shrink-0"
+        >
+          <a class="decoration-none flex" href="">
+            <span class="text-[0.9rem] text-white font-[500] my-[6px] ml-[0.125rem]"
+              >Fresh</span
+            >
+            <div>
+              <img
+                class="h-[1.125rem] mt-[10px]"
+                src="./image/icons/drop-down.svg"
+                alt="drop-icon"
+              />
+            </div>
+          </a>
+          <!-- drop-container fresh-drop-container -->
+          <div
+            class="fresh-drop drop-container after:border-t-transparent after:border-b-white w-[360px] -top-[45%] -left-[5%] after:bottom-[100%] after:left-[13.4%] invisible"
+          >
+            <div class="flex justify-around mt-[1.25rem] mb-[10px]">
+              <!-- img-container -->
+              <a
+                class="size-[10rem] bg-[#eee] hover:bg-[#ddd] hover:cursor-pointer"
+                style="margin: 5px 5px 5px 15px"
+              >
+                <img
+                  class="h-[5rem] w-[7rem] p-[5px] mt-[2.5rem] ml-[1.25rem]"
+                  src="./image/A-Fresh-Logo.png"
+                  alt="fresh-logo"
+                />
+              </a>
+              <!-- img-container -->
+              <a
+                class="size-[10rem] bg-[#eee] hover:bg-[#ddd] hover:cursor-pointer"
+                style="margin: 5px 15px 5px 5px"
+              >
+                <img
+                  class="h-[5rem] w-[7rem] p-[5px] mt-[2.5rem] ml-[1.25rem]"
+                  src="./image/A-Fresh-Logo.png"
+                  alt="fresh-meat-logo"
+                />
+              </a>
+            </div>
+            <!-- all-link -->
+            <a
+              class="decoration-none ml-[15px] mb-[10px] text-blue-600 hover:text-purple-500 hover:underline"
+              href=""
+              >Shop all groceries on Amazon</a
+            >
+          </div>
+        </div>
+        <!-- mxPlayer -->
+        <div class="select h-[35px] w-[5.2rem] ml-[1px] px-[4px] shrink-0">
+          <a class="decoration-none flex" href="">
+            <span class="text-[0.9rem] text-white font-[500] my-[6px] ml-[4px]"
+              >MX Player</span
+            >
+          </a>
+        </div>
+        <!-- sell -->
+        <div class="select h-[35px] w-[2.5rem] ml-[1px] px-[4px] shrink-0">
+          <a class="decoration-none flex" href="">
+            <span class="text-[0.9rem] text-white font-[500] my-[6px] ml-[4px]"
+              >Sell</span
+            >
+          </a>
+        </div>
+        <!-- bestSellers -->
+        <div class="select h-[35px] w-[5.3rem] ml-[1px] px-[4px] shrink-0">
+          <a class="decoration-none flex" href="">
+            <span class="text-[0.9rem] text-white font-[500] my-[6px] ml-[4px]"
+              >Bestsellers</span
+            >
+          </a>
+        </div>
+        <!-- 2daysDeal -->
+        <div class="select h-[35px] w-[6.2rem] ml-[1px] px-[4px] shrink-0">
+          <a class="decoration-none flex" href="">
+            <span class="text-[0.9rem] text-white font-[500] my-[6px] ml-[4px]"
+              >Todays Deals</span
+            >
+          </a>
+        </div>
+        <!-- mobiles -->
+        <div class="select h-[35px] w-[4.3rem] ml-[1px] px-[4px] shrink-0">
+          <a class="decoration-none flex" href="">
+            <span class="text-[0.9rem] text-white font-[500] my-[6px] ml-[4px]"
+              >Mobiles</span
+            >
+          </a>
+        </div>
+        <!-- prime -->
+        <div
+          class="prime select h-[35px] w-[4.3rem] ml-[1px] px-[4px] relative group"
+        >
+          <a class="decoration-none flex" href="">
+            <span class="text-[0.9rem] text-white font-[500] my-[6px] ml-[4px]"
+              >Prime</span
+            >
+            <div>
+              <img
+                class="h-[1.125rem] mt-[10px]"
+                src="./image/icons/drop-down.svg"
+                alt="drop-icon"
+              />
+            </div>
+          </a>
+          <!-- prime-drop-container drop-container -->
+          <div
+            class="prime-drop drop-container after:border-t-transparent after:border-b-white w-[335px] -top-[45%] -left-[3%] after:bottom-[100%] after:left-[15.5%] invisible"
+          >
+            <img
+              class="m-[10px]"
+              src="./image/prime-drop-img.jpg"
+              alt="join-prime-img"
+            />
+          </div>
+        </div>
+        <!-- custServices -->
+        <div class="select h-[35px] w-[8.2rem] ml-[1px] px-[4px] shrink-0">
+          <a class="decoration-none flex" href="">
+            <span class="text-[0.9rem] text-white font-[500] my-[6px] ml-[4px]"
+              >Customer Service</span
+            >
+          </a>
+        </div>
+        <!-- newRelease -->
+        <div class="select h-[35px] w-[6.5rem] ml-[1px] px-[4px] shrink-0">
+          <a class="decoration-none flex" href="">
+            <span class="text-[0.9rem] text-white font-[500] my-[6px] ml-[4px]"
+              >New Releases</span
+            >
+          </a>
+        </div>
+        <!-- electronics -->
+        <div class="select h-[35px] w-[5.4rem] ml-[1px] px-[4px] shrink-0">
+          <a class="decoration-none flex" href="">
+            <span class="text-[0.9rem] text-white font-[500] my-[6px] ml-[4px]"
+              >Electronics</span
+            >
+          </a>
+        </div>
+        <!-- fashion -->
+        <div class="select h-[35px] w-[4.3rem] ml-[1px] px-[4px] shrink-0">
+          <a class="decoration-none flex" href="">
+            <span class="text-[0.9rem] text-white font-[500] my-[6px] ml-[4px]"
+              >Fashion</span
+            >
+          </a>
+        </div>
+        <!-- aPay -->
+        <div class="select h-[35px] w-[6rem] ml-[1px] px-[4px] shrink-0">
+          <a class="decoration-none flex" href="">
+            <span class="text-[0.9rem] text-white font-[500] my-[6px] ml-[4px]"
+              >Amazon Pay</span
+            >
+          </a>
+        </div>
+        <!-- kitchen -->
+        <div class="select h-[35px] w-[7.6rem] ml-[1px] px-[4px] shrink-0">
+          <a class="decoration-none flex" href="">
+            <span class="text-[0.9rem] text-white font-[500] my-[6px] ml-[4px]"
+              >Home & Kitchen</span
+            >
+          </a>
+        </div>
+        <!-- computer -->
+        <div class="select h-[35px] w-[5.5rem] ml-[1px] px-[4px] shrink-0">
+          <a class="decoration-none flex" href="">
+            <span class="text-[0.9rem] text-white font-[500] my-[6px] ml-[4px]"
+              >Computers</span
+            >
+          </a>
+        </div>
+        <!-- books -->
+        <div class="select h-[35px] w-[3.5rem] ml-[1px] px-[4px] shrink-0">
+          <a class="decoration-none flex" href="">
+            <span class="text-[0.9rem] text-white font-[500] my-[6px] ml-[4px]"
+              >Books</span
+            >
+          </a>
+        </div>
+        <!-- carsBikes -->
+        <div class="select h-[35px] w-[8.1rem] ml-[1px] px-[4px] shrink-0">
+          <a class="decoration-none flex" href="">
+            <span class="text-[0.9rem] text-white font-[500] my-[6px] ml-[4px]"
+              >Cars & Motorbike</span
+            >
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Address Alert -->
+    <section class="addr-alert flex flex-col absolute top-[36%] left-[38%] h-[15.5rem] w-[365px] z-4 rounded-[10px] bg-white hidden">
+      <div class="flex justify-between h-[60px] rounded-t-[10px] bg-gray-100">
+        <p class="text-[15px] font-bold ml-[25px] my-[17px]">Choose your location</p>
+        <div class="close-addr size-[3.125rem] mr-[5px] my-[4px] rounded-[10px] hover:border-[3px] hover:border-blue-700 hover:cursor-pointer">
+          <img src="./image/icons/closeB.svg" class="size-[30px] mx-[7px] my-[7px]" alt="close-icon">
+        </div>
+      </div>
+      <hr class="text-gray-300">
+      <div class="flex flex-col p-4"> 
+        <p class="text-[12.5px] text-gray-600 px-2 mb-[10px]">Select a delivery location to see product availability and <br> delivery options</p>
+        <a
+          href=""
+          class="block text-[13px] text-center w-[95%] m-auto py-[5.5px] rounded-[30px] bg-yellow-300 hover:bg-yellow-400"
+          >Sign in to see your addresses</a
+        >
+        <p class="text-[12.5px] text-gray-600 px-2 my-[10px]">---------------- or enter an Indian pincode ----------------</p>
+        <div class="flex">
+          <input type="text" class="h-[30px] w-[21.25rem] ml-2 border border-gray-400 rounded-[5px] outline-transparent focus:outline-[3px] focus:outline-blue-700">
+          <div class="h-[30px] w-[90px] ml-2 text-[13px] text-center border border-gray-400 rounded-[3.125rem] hover:bg-blue-50 hover:cursor-pointer active:outline-[3px] active:outline-blue-700">Apply</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- All-Drop-Section -->
+    <section class="all-drop-container absolute -left-110 w-[365px] h-[100vh]">
+      <!-- all-header -->
+      <div class="flex h-[3.75rem] -mt-[5px] text-white bg-navbar2 relative">
+        <a class="flex px-[10px] py-[6px]" href="">
+          <div class="w-[3.125rem]">
+            <img
+              class="size-[2.5rem] ml-[30px]"
+              src="./image/icons/all-profile.svg"
+              alt="profile-icon"
+            />
+          </div>
+          <span class="text-[1.25rem] my-[5px] mx-[30px] font-bold"
+            >Hello, sign in</span
+          >
+        </a>
+        <!-- close-btn -->
+        <div
+          class="close-btn absolute inline-block size-[2.5rem] top-[20%] -right-[13%] border border-w-[1.5px] border-white rounded-[5px] hover:cursor-pointer"
+        >
+          <img
+            class="size-[25px] m-[6px]"
+            src="./image/icons/closeW.svg"
+            alt="close-icon"
+          />
+        </div>
+      </div>
+      <!-- all-data -->
+      <div class="overflow-scroll overflow-x-hidden flex flex-col bg-white">
+        <div class="flex flex-col">
+          <!-- all-content-head -->
+          <span class="w-[360px] text-[1.25rem] px-[2.5rem] py-[15px]"
+            >Trending</span
+          >
+          <!-- all-content-data -->
+          <a
+            href=""
+            class="h-[45px] text-black px-[2.5rem] py-[10px] hover:bg-[#e0e0e0]"
+          >
+            <span class="font-normal">Best Sellers</span>
+          </a>
+          <!-- all-content-data -->
+          <a
+            href=""
+            class="h-[45px] text-black px-[2.5rem] py-[10px] hover:bg-[#e0e0e0]"
+          >
+            <span class="font-normal">New Releases</span>
+          </a>
+          <!-- all-content-data -->
+          <a
+            href=""
+            class="h-[45px] text-black px-[2.5rem] py-[10px] hover:bg-[#e0e0e0]"
+          >
+            <span class="font-normal">Movers and Shakers</span>
+          </a>
+        </div>
+        <hr class="text-gray-300" />
+        <div class="flex flex-col">
+          <!-- all-content-head -->
+          <span class="w-[360px] text-[1.25rem] px-[2.5rem] py-[15px]"
+            >Digital Content and Devices</span
+          >
+          <!-- all-content-data -->
+          <a
+            href=""
+            class="h-[45px] text-black px-[2.5rem] py-[10px] hover:bg-[#e0e0e0]"
+          >
+            <span class="font-normal">Amazon miniTV- FREE entertainment</span>
+          </a>
+          <!-- all-content-data -->
+          <a
+            href=""
+            class="flex justify-between h-[45px] text-black px-[2.5rem] hover:bg-[#e0e0e0]"
+          >
+            <span class="font-normal py-[10px]">Echo & Alexa</span>
+            <img
+              class="size-[30px] mt-[5px]"
+              src="./image/icons/right-arrow.svg"
+              alt="right-arrow-icon"
+            />
+          </a>
+          <!-- all-content-data -->
+          <a
+            href=""
+            class="flex justify-between h-[45px] text-black px-[2.5rem] hover:bg-[#e0e0e0]"
+          >
+            <span class="font-normal py-[10px]">Fire TV</span>
+            <img
+              class="size-[30px] mt-[5px]"
+              src="./image/icons/right-arrow.svg"
+              alt="right-arrow-icon"
+            />
+          </a>
+          <!-- all-content-data -->
+          <a
+            href=""
+            class="flex justify-between h-[45px] text-black px-[2.5rem] hover:bg-[#e0e0e0]"
+          >
+            <span class="font-normal py-[10px]">Kindle E-Readers & eBooks</span>
+            <img
+              class="size-[30px] mt-[5px]"
+              src="./image/icons/right-arrow.svg"
+              alt="right-arrow-icon"
+            />
+          </a>
+          <!-- all-content-data -->
+          <a
+            href=""
+            class="flex justify-between h-[45px] text-black px-[2.5rem] hover:bg-[#e0e0e0]"
+          >
+            <span class="font-normal py-[10px]">Audible Audiobooks</span>
+            <img
+              class="size-[30px] mt-[5px]"
+              src="./image/icons/right-arrow.svg"
+              alt="right-arrow-icon"
+            />
+          </a>
+          <!-- all-content-data -->
+          <a
+            href=""
+            class="flex justify-between h-[45px] text-black px-[2.5rem] hover:bg-[#e0e0e0]"
+          >
+            <span class="font-normal py-[10px]">Amazon Prime Video</span>
+            <img
+              class="size-[30px] mt-[5px]"
+              src="./image/icons/right-arrow.svg"
+              alt="right-arrow-icon"
+            />
+          </a>
+          <!-- all-content-data -->
+          <a
+            href=""
+            class="flex h-[45px] text-black px-[2.5rem] hover:bg-[#e0e0e0]"
+          >
+            <span class="font-normal py-[10px]">Amazon Prime Music</span>
+            <img
+              class="size-[30px] mt-[5px] ml-[33.7%]"
+              src="./image/icons/right-arrow.svg"
+              alt="right-arrow-icon"
+            />
+          </a>
+        </div>
+        <hr class="text-gray-300" />
+        <div class="flex flex-col">
+          <!-- all-content-head -->
+          <span class="w-[360px] text-[1.25rem] px-[2.5rem] py-[15px]"
+            >Shop by Category</span
+          >
+          <!-- all-content-data -->
+          <a
+            href=""
+            class="flex justify-between h-[45px] text-black px-[2.5rem] hover:bg-[#e0e0e0]"
+          >
+            <span class="font-normal py-[10px]">Mobiles, Computers</span>
+            <img
+              class="size-[30px] mt-[5px]"
+              src="./image/icons/right-arrow.svg"
+              alt="right-arrow-icon"
+            />
+          </a>
+          <!-- all-content-data -->
+          <a
+            href=""
+            class="flex justify-between h-[45px] text-black px-[2.5rem] hover:bg-[#e0e0e0]"
+          >
+            <span class="font-normal py-[10px]"
+              >TV, Appliances, Electronics</span
+            >
+            <img
+              class="size-[30px] mt-[5px]"
+              src="./image/icons/right-arrow.svg"
+              alt="right-arrow-icon"
+            />
+          </a>
+          <!-- all-content-data -->
+          <a
+            href=""
+            class="flex justify-between h-[45px] text-black px-[2.5rem] hover:bg-[#e0e0e0]"
+          >
+            <span class="font-normal py-[10px]">Men's Fashion</span>
+            <img
+              class="size-[30px] mt-[5px]"
+              src="./image/icons/right-arrow.svg"
+              alt="right-arrow-icon"
+            />
+          </a>
+          <!-- all-content-data -->
+          <a
+            href=""
+            class="flex justify-between h-[45px] text-black px-[2.5rem] hover:bg-[#e0e0e0]"
+          >
+            <span class="font-normal py-[10px]">Women's Fashion</span>
+            <img
+              class="size-[30px] mt-[5px]"
+              src="./image/icons/right-arrow.svg"
+              alt="right-arrow-icon"
+            />
+          </a>
+          <!-- all-content-data -->
+          <a
+            href=""
+            class="flex h-[45px] text-black px-[2.5rem] hover:bg-[#e0e0e0]"
+          >
+            <span class="font-normal py-[10px]">See all</span>
+            <img
+              class="size-[30px] mt-[8px] ml-[3%]"
+              src="./image/icons/down-arrow.svg"
+              alt="down-arrow-icon"
+            />
+          </a>
+        </div>
+        <hr class="text-gray-300" />
+        <div class="flex flex-col">
+          <!-- all-content-head -->
+          <span class="w-[360px] text-[1.25rem] px-[2.5rem] py-[15px]"
+            >Programs & Features</span
+          >
+          <!-- all-content-data -->
+          <a
+            href=""
+            class="flex h-[45px] text-black px-[2.5rem] py-[10px] hover:bg-[#e0e0e0]"
+            >Amazon Pay</a
+          >
+          <!-- all-content-data -->
+          <a
+            href=""
+            class="flex justify-between h-[45px] text-black px-[2.5rem] hover:bg-[#e0e0e0]"
+          >
+            <span class="font-normal py-[10px]"
+              >Gift Cards & Mobile Recharges</span
+            >
+            <img
+              class="size-[30px] mt-[5px]"
+              src="./image/icons/right-arrow.svg"
+              alt="right-arrow-icon"
+            />
+          </a>
+          <!-- all-content-data -->
+          <a
+            href=""
+            class="h-[45px] text-black px-[2.5rem] py-[10px] hover:bg-[#e0e0e0]"
+            >Amazon Luanchpad</a
+          >
+          <!-- all-content-data -->
+          <a
+            href=""
+            class="h-[45px] text-black px-[2.5rem] py-[10px] hover:bg-[#e0e0e0]"
+            >Amazon Business</a
+          >
+          <!-- all-content-data -->
+          <a
+            href=""
+            class="flex h-[45px] text-black px-[2.5rem] hover:bg-[#e0e0e0]"
+          >
+            <span class="font-normal py-[10px]">See all</span>
+            <img
+              class="size-[30px] mt-[7px] ml-[3%]"
+              src="./image/icons/down-arrow.svg"
+              alt="down-arrow-icon"
+            />
+          </a>
+        </div>
+        <hr class="text-gray-300" />
+        <div class="flex flex-col">
+          <!-- all-content-head -->
+          <span class="w-[360px] text-[1.25rem] px-[2.5rem] py-[15px]"
+            >Help & Settings</span
+          >
+          <!-- all-content-data -->
+          <a
+            href=""
+            class="h-[45px] text-black px-[2.5rem] py-[10px] hover:bg-[#e0e0e0]"
+            >Your Account</a
+          >
+          <!-- all-content-data -->
+          <a
+            href=""
+            class="h-[45px] text-black px-[2.5rem] py-[10px] hover:bg-[#e0e0e0]"
+            >Customer Service</a
+          >
+          <!-- all-content-data -->
+          <a
+            href=""
+            class="h-[45px] text-black px-[2.5rem] py-[10px] hover:bg-[#e0e0e0]"
+            >Sign in</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Hero-section -->
+    <section class="hero-container relative">
+      <!-- hero-image-container -->
+      <div class="hero-list flex overflow-hidden">
+        <div class="hero-imgs">
+          <img
+            src="./image/hero-wallpaper/contentPage1.jpg"
+            class="w-[99%] h-[100%] m-auto"
+            alt="img1"
+          />
+        </div>
+        <div class="hero-imgs">
+          <img
+            src="./image/hero-wallpaper/contentPage2.jpg"
+            class="w-[99%] h-[100%] m-auto"
+            alt="img2"
+          />
+        </div>
+        <div class="hero-imgs">
+          <img
+            src="./image/hero-wallpaper/contentPage3.jpg"
+            class="w-[99%] h-[100%] m-auto"
+            alt="img3"
+          />
+        </div>
+        <div class="hero-imgs">
+          <img
+            src="./image/hero-wallpaper/contentPage4.jpg"
+            class="w-[99%] h-[100%] m-auto"
+            alt="img4"
+          />
+        </div>
+        <div class="hero-imgs">
+          <img
+            src="./image/hero-wallpaper/contentPage5.jpg"
+            class="w-[99%] h-[100%] m-auto"
+            alt="img5"
+          />
+        </div>
+        <div class="hero-imgs">
+          <img
+            src="./image/hero-wallpaper/contentPage6.jpg"
+            class="w-[99%] h-[100%] m-auto"
+            alt="img6"
+          />
+        </div>
+        <div class="hero-imgs">
+          <img
+            src="./image/hero-wallpaper/contentPage7.jpg"
+            class="w-[99%] h-[100%] m-auto"
+            alt="img6"
+          />
+        </div>
+        <div class="hero-imgs">
+          <img
+            src="./image/hero-wallpaper/contentPage8.jpg"
+            class="w-[99%] h-[100%] m-auto"
+            alt="img6"
+          />
+        </div>
+      </div>
+
+      <!-- fade-hero-images -->
+      <a
+        class="absolute top-0 w-[100%] h-[100%] m-auto bg-linear-to-b from-neutral-200/0 to-neutral-200/100 hover:cursor-pointer"
+        href=""
+      ></a>
+
+      <!-- hero-btns-containers -->
+      <div
+        class="hero-arrows-container absolute top-0 w-[100%] flex justify-between"
+      >
+        <div class="hero-btn hero-btn-l ml-2">
+          <img
+            id="hero-btn-l"
+            class="h-[35px] mt-[110px] mx-[25px]"
+            src="./image/icons/content-left-arrow.svg"
+            alt="hot-content-left-arrow-icon"
+          />
+        </div>
+        <div class="hero-btn hero-btn-r mr-2">
+          <img
+            id="hero-btn-r"
+            class="h-[35px] mt-[110px] mx-[25px]"
+            src="./image/icons/content-right-arrow.svg"
+            alt="hot-content-right-arrow-icon"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Content-Section -->
+    <section
+      class="flex flex-col absolute w-[99%] h-[100%] top-[50%] left-2 gap-y-[1.25rem]"
+    >
+      <!-- row1 box4 -->
+      <div class="box4-row">
+        <div class="box4-box">
+          <h2 class="text-[21px] font-bold leading-[1.75rem]">
+            Appliances for your home | Up to 55% off
+          </h2>
+          <div class="flex justify-between mt-3">
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static111.jpg"
+                alt="mini1"
+                class="w-[100%] h-25"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">Air conditioners</span>
+            </div>
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static112.jpg"
+                alt="mini1"
+                class="w-[100%] h-25"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">Refrigerators</span>
+            </div>
+          </div>
+          <div class="flex justify-between mt-7">
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static113.jpg"
+                alt="mini1"
+                class="w-[100%] h-25"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">Microwaves</span>
+            </div>
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static114.jpg"
+                alt="mini1"
+                class="w-[100%] h-25"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">Washing machines</span>
+            </div>
+          </div>
+          <a
+            href=""
+            class="decoration-none text-[13px] mt-[30.125rem] text-blue-700 font-semibold hover:text-blue-900"
+            >See more</a
+          >
+        </div>
+        <div class="box4-box">
+          <h2 class="text-[21px] font-bold leading-[28px]">
+            Revamp your home in style
+          </h2>
+          <div class="flex justify-between mt-3">
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static121.jpg"
+                alt="mini1"
+                class="w-[100%] h-29"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]"
+                >Cushion covers, bedsheets & more</span
+              >
+            </div>
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static122.jpg"
+                alt="mini1"
+                class="w-[100%] h-29"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">Figurines, vases & more</span>
+            </div>
+          </div>
+          <div class="flex justify-between mt-2">
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static123.jpg"
+                alt="mini1"
+                class="w-[100%] h-29"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">Home storage</span>
+            </div>
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static124.jpg"
+                alt="mini1"
+                class="w-[100%] h-29"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">Lighting Solutions</span>
+            </div>
+          </div>
+          <a
+            href=""
+            class="decoration-none text-[13px] mt-[30px] text-blue-700 font-semibold hover:text-blue-900"
+            >Explore all</a
+          >
+        </div>
+        <div class="box4-box">
+          <h2 class="text-[21px] font-bold leading-[28px]">
+            Starting ₹249 | Headphones
+          </h2>
+          <div class="flex justify-between mt-3">
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static131.jpg"
+                alt="mini1"
+                class="w-[100%] h-29"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">Starting ₹249 | boat</span>
+            </div>
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static132.jpg"
+                alt="mini1"
+                class="w-[100%] h-29"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">Starting ₹349 | boult</span>
+            </div>
+          </div>
+          <div class="flex justify-between mt-6">
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static133.jpg"
+                alt="mini1"
+                class="w-[100%] h-29"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">Starting ₹649 | Noise</span>
+            </div>
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static134.jpg"
+                alt="mini1"
+                class="w-[100%] h-29"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]"
+                >Starting ₹149 | Zebronics</span
+              >
+            </div>
+          </div>
+          <a
+            href=""
+            class="decoration-none text-[13px] mt-[30px] text-blue-700 font-semibold hover:text-blue-900"
+            >See all offers</a
+          >
+        </div>
+        <div class="box4-signIn">
+          <h2 class="text-[21px] font-bold leading-[28px]">
+            Sign in for your best experience
+          </h2>
+          <a
+          href=""
+          class="block text-[13px] text-center w-[100%] m-auto py-[5.5px] rounded-[30px] bg-yellow-300 hover:bg-yellow-400"
+          >Sign in securely</a
+        >
+        </div>
+      </div>
+      <!-- row2 box4 -->
+      <div class="box4-row">
+        <div class="box4-box">
+          <h2 class="text-[21px] font-bold leading-[1.25rem]">
+            Automotive essentials | Up to 60% off
+          </h2>
+          <div class="flex justify-between mt-3">
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static211.jpg"
+                alt="mini1"
+                class="w-[100%] h-25"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">Cleaning accessories</span>
+            </div>
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static212.jpg"
+                alt="mini1"
+                class="w-[100%] h-25"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">Tire & rim care</span>
+            </div>
+          </div>
+          <div class="flex justify-between mt-7">
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static213.jpg"
+                alt="mini1"
+                class="w-[100%] h-25"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">Helmets</span>
+            </div>
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static214.jpg"
+                alt="mini1"
+                class="w-[100%] h-25"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">Vacuum cleaner</span>
+            </div>
+          </div>
+          <a
+            href=""
+            class="decoration-none text-[13px] mt-[30.125rem] text-blue-700 font-semibold hover:text-blue-900"
+            >See more</a
+          >
+        </div>
+        <div class="box4-box">
+          <h2 class="text-[21px] font-bold leading-[28px]">
+            Starting ₹199 | Amazon Brands & more
+          </h2>
+          <div class="flex justify-between mt-3">
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static221.jpg"
+                alt="mini1"
+                class="w-[100%] h-25"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]"
+                >Starting ₹199 | Bedsheets</span
+              >
+            </div>
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static222.jpg"
+                alt="mini1"
+                class="w-[100%] h-25"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">Starting ₹199 | Curtains</span>
+            </div>
+          </div>
+          <div class="flex justify-between mt-7">
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static223.jpg"
+                alt="mini1"
+                class="w-[100%] h-25"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">Minimum 40% off | Ironing board & more</span>
+            </div>
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static224.jpg"
+                alt="mini1"
+                class="w-[100%] h-25"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">Up to 60% off | Home decor</span>
+            </div>
+          </div>
+          <a
+            href=""
+            class="decoration-none text-[13px] mt-[15px] text-blue-700 font-semibold hover:text-blue-900"
+            >See more</a
+          >
+        </div>
+        <div class="box4-box">
+          <h2 class="text-[21px] font-bold leading-[28px]">
+            Up to 60% off | Styles for women
+          </h2>
+          <div class="flex justify-between mt-3">
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static231.jpg"
+                alt="mini1"
+                class="w-[100%] h-25"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">Women's clothing</span>
+            </div>
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static232.jpg"
+                alt="mini1"
+                class="w-[100%] h-25"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">Footwears+handbags</span>
+            </div>
+          </div>
+          <div class="flex justify-between mt-7">
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static233.jpg"
+                alt="mini1"
+                class="w-[100%] h-25"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">Watches</span>
+            </div>
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static234.jpg"
+                alt="mini1"
+                class="w-[100%] h-25"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">Fashion jewellery</span>
+            </div>
+          </div>
+          <a
+            href=""
+            class="decoration-none text-[13px] mt-[30.125rem] text-blue-700 font-semibold hover:text-blue-900"
+            >End of season sale</a
+          >
+        </div>
+        <div class="box4-box">
+          <h2 class="text-[21px] font-bold leading-[28px]">
+            Under ₹499 | Deals on home improvement essentials
+          </h2>
+          <div class="flex justify-between mt-3">
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static241.jpg"
+                alt="mini1"
+                class="w-[100%] h-25"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">Under ₹199 | Cleaning supplies</span>
+            </div>
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static242.jpg"
+                alt="mini1"
+                class="w-[100%] h-25"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">Under ₹399 | Bathroom accessories/span>
+            </div>
+          </div>
+          <div class="flex justify-between mt-2">
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static243.jpg"
+                alt="mini1"
+                class="w-[100%] h-25"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">Under ₹499 | Home tools</span>
+            </div>
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static244.jpg"
+                alt="mini1"
+                class="w-[100%] h-25"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">Under ₹299 | Wallpapers</span>
+            </div>
+          </div>
+          <a
+            href=""
+            class="decoration-none text-[13px] mt-[30.125rem] text-blue-700 font-semibold hover:text-blue-900"
+            >Explore all</a
+          >
+        </div>
+      </div>
+      <!-- row3 box5 -->
+      <div class="box5-row p-5">
+        <h2 class="text-[21px] font-bold leading-[1.25rem] mb-[5px] mr-[1.25rem]">
+          Up to 80% off | Handpicked products from Small businesses
+          <a
+            href=""
+            class="decoration-none ml-[10px] text-[15px] text-blue-700 font-semibold hover:decoration-1 hover:underline hover:text-blue-900"
+            >See more</a
+          >
+        </h2>
+        <!-- box-area -->
+        <div class="flex gap-x-[10px] h-[31.25rem] overflow-hidden">
+          <div class="slide-row3-box">
+            <a href="">
+              <img
+                src="./image/slide-content/slide31.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic1"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide32.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic2"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide33.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic3"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide34.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic4"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide35.jpg"
+                class="h-[200px] min-w-[115px] mx-[15px]"
+                alt="pic5"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide36.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic6"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide37.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic7"
+              />
+            </a>
+          </div>
+          <div class="slide-row3-box">
+            <a href="">
+              <img
+                src="./image/slide-content/slide38.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic8"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide39.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic9"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide310.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic10"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide311.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic11"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide312.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic12"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide313.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic13"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide314.jpg"
+                class="h-[200px] min-w-[11.25rem] mx-[15px]"
+                alt="pic14"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- row3 slide-arrow -->
+      <div
+        class="flex justify-between absolute h-[13.75rem] w-[97.2%] top-[134%] left-[1.4%] group"
+      >
+        <div class="slide-arrow-L" id="slide-arrow-L3">
+          <img
+            class="h-[100px] w-[3.125rem]"
+            src="./image/icons/row-left-arrow.svg"
+            alt="row-left-arrow-icon"
+          />
+        </div>
+        <div class="slide-arrow-R mr-[17px]" id="slide-arrow-R3">
+          <img
+            class="h-[100px] w-[3.125rem]"
+            src="./image/icons/row-right-arrow.svg"
+            alt="row-right-arrow-icon"
+          />
+        </div>
+      </div>
+      <!-- row4 box5 -->
+      <div class="box5-row p-5">
+        <h2 class="text-[21px] font-bold leading-[28px] mb-[5px] mr-[1.25rem]">
+          Min. 50% off | Unique home finds | Amazon Brands & more
+          <a
+            href=""
+            class="decoration-none ml-[10px] text-[15px] text-blue-700 font-semibold hover:decoration-1 hover:underline hover:text-blue-900"
+            >See all
+          </a>
+        </h2>
+        <!-- box-area -->
+        <div class="flex h-[31.25rem] overflow-hidden">
+          <div class="slide-row4-box">
+            <a href="">
+              <img
+                src="./image/slide-content/slide41.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic1"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide42.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic2"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide43.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic3"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide44.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic4"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide45.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic5"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide46.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic6"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide47.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic7"
+              />
+            </a>
+          </div>
+          <div class="slide-row4-box">
+            <a href="">
+              <img
+                src="./image/slide-content/slide48.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic8"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide49.jpg"
+                class="h-[200px] min-w-[170px]"
+                alt="pic9"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide410.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic10"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide411.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic11"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide412.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic12"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide413.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic13"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide414.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic14"
+              />
+            </a>
+          </div>
+          <div class="slide-row4-box">
+            <a href="">
+              <img
+                src="./image/slide-content/slide415.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic15"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide416.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic16"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide417.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic17"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide418.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic18"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide419.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic19"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide420.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic20"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide421.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic21"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- row4 slide-arrow -->
+      <div
+        class="flex justify-between absolute h-[13.75rem] w-[97.3%] top-[180%] left-[1.4%] group"
+      >
+        <div class="slide-arrow-L" id="slide-arrow-L4">
+          <img
+            class="h-[100px] w-[3.125rem]"
+            src="./image/icons/row-left-arrow.svg"
+            alt="row-left-arrow-icon"
+          />
+        </div>
+        <div class="slide-arrow-R mr-[17px]" id="slide-arrow-R4">
+          <img
+            class="h-[100px] w-[3.125rem]"
+            src="./image/icons/row-right-arrow.svg"
+            alt="row-right-arrow-icon"
+          />
+        </div>
+      </div>
+      <!-- row5 box4 -->
+      <div class="box4-row">
+        <div class="box4-box">
+          <h2 class="text-[21px] font-bold leading-[28px]">
+            Under ₹350 | Top bestsellers from Small businesses
+          </h2>
+          <div class="mt-[8px] relative">
+            <div class="box51 absolute flex flex-col min-w-[310px] mr-[1.25rem]">
+              <img src="./image/static-content/static511.jpg" class="h-[165px] w-[165px] ml-[70px]" alt="img1">
+              <p class="text-[14.5px] text-wrap font-fam leading-[17px] mt-[3px]">ECO MATRIX Kitchen Utensil Dish Drying Mat | Quick Dry Water Absorbent mat | Placemat for Dish Drying</p>
+              <p><sup>₹</sup><span class="text-[1.25rem] font-semibold tracking-[1px]">151</span><sup>05</sup>         <span class="text-gray-500"><sub>M.R.P:   <del>₹499.00</del></sub></span></p>
+            </div>
+            <div class="box51 absolute flex flex-col min-w-[310px] mr-[1.25rem] hidden">
+              <img src="./image/static-content/static512.jpg" class="h-[165px] w-[165px] ml-[70px]" alt="img1">
+              <p class="text-[14.5px] text-wrap font-fam leading-[17px] mt-[3px]">Kliffoo Cool Mist Humidifier for Room Mositure, USB Ultrasonic air Humidifier with 7 Color Night Lights</p>
+              <p><sup>₹</sup><span class="text-[1.25rem] font-semibold tracking-[1px]">367</span><sup>00</sup>         <span class="text-gray-500"><sub>M.R.P:   <del>₹1,299.00</del></sub></span></p>
+            </div>
+            <div class="box51 absolute flex flex-col min-w-[310px] mr-[1.25rem] hidden">
+              <img src="./image/static-content/static513.jpg" class="h-[165px] w-[165px] ml-[70px]" alt="img1">
+              <p class="text-[14.5px] text-wrap font-fam leading-[17px] mt-[3px]">Earthy Sapo Reetha Shampoo Bar for Dry Hair (100g, Pack of 1) | Handmade Ayurvedic Hair Care</p>
+              <p><sup>₹</sup><span class="text-[1.25rem] font-semibold tracking-[1px]">259</span><sup>00</sup>         <span class="text-gray-500"><sub>M.R.P:   <del>₹275.00</del></sub></span></p>
+            </div>
+            <div class="box51 absolute flex flex-col min-w-[310px] mr-[1.25rem] hidden">
+              <img src="./image/static-content/static514.jpg" class="h-[165px] w-[165px] ml-[70px]" alt="img1">
+              <p class="text-[14.5px] text-wrap font-fam leading-[17px] mt-[3px]">TASMAX 5 in 1 hanger multi purpose hangers for wardrobe pant hangers for wardrobe leggings org</p>
+              <p><sup>₹</sup><span class="text-[1.25rem] font-semibold tracking-[1px]">279</span><sup>00</sup>         <span class="text-gray-500"><sub>M.R.P:   <del>₹699.00</del></sub></span></p>
+            </div>
+          </div>
+          <div class="flex justify-around px-[10px] mt-65">
+            <div class="mini-box51 border border-gray-400 outline-[3px] outline-blue-700 rounded-[8px] h-[65px] w-[65px] hover:cursor-pointer">
+              <img
+                src="./image/static-content/static511.jpg"
+                alt="mini1"
+                class="w-[55px] h-[55px] rounded-[8px] mx-[5px] my-[5px]"
+              />
+            </div>
+            <div class="mini-box51 border border-gray-400 outline-[3px] outline-transparent rounded-[8px] h-[65px] w-[65px] hover:cursor-pointer">
+              <img
+                src="./image/static-content/static512.jpg"
+                alt="mini1"
+                class="w-[55px] h-[55px] rounded-[8px] mx-[4px] my-[4px]"
+              />
+            </div>
+            <div class="mini-box51 border border-gray-400 outline-[3px] outline-transparent rounded-[8px] h-[65px] w-[65px] hover:cursor-pointer">
+              <img
+                src="./image/static-content/static513.jpg"
+                alt="mini1"
+                class="w-[55px] h-[55px] rounded-[8px] mx-[4px] my-[4px]"
+              />
+            </div>
+            <div class="mini-box51 border border-gray-400 outline-[3px] outline-transparent rounded-[8px] h-[65px] w-[65px] hover:cursor-pointer">
+              <img
+                src="./image/static-content/static514.jpg"
+                alt="mini1"
+                class="w-[55px] h-[55px] rounded-[8px] mx-[4px] my-[4px]"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="box4-box">
+          <h2 class="text-[21px] font-bold leading-[28px]">
+            Keep shopping for
+          </h2>
+          <div class="mt-[8px] relative">
+            <div class="box52 absolute flex flex-col min-w-[310px] mr-[1.25rem]">
+              <img src="./image/static-content/static521.jpg" class="h-[165px] w-[165px] ml-[70px]" alt="img1">
+              <p class="text-[14.5px] text-wrap font-fam leading-[17px] mt-[3px]">Latali New Silicone Case Compatible with Boat Nirvana ion Protective Soft Silicone 360° Full Prot</p>
+              <p><sup>₹</sup><span class="text-[1.25rem] font-semibold tracking-[1px]">269</span><sup>00</sup>         <span class="text-gray-500"><sub>M.R.P:   <del>₹999.00</del></sub></span></p>
+            </div>
+            <div class="box52 absolute flex flex-col min-w-[310px] mr-[1.25rem] hidden">
+              <img src="./image/static-content/static522.jpg" class="h-[165px] w-[165px] ml-[70px]" alt="img1">
+              <p class="text-[14.5px] text-wrap font-fam leading-[17px] mt-[3px]">BOBO BM4 PRO Jaw-Grip with Vibration Controller Waterproof Bike/Motorcycle/Scooter Mobile Phone</p>
+              <p><sup>₹</sup><span class="text-[1.25rem] font-semibold tracking-[1px]">1,599</span><sup>00</sup>         <span class="text-gray-500"><sub>M.R.P:   <del>₹2,999.00</del></sub></span></p>
+            </div>
+            <div class="box52 absolute flex flex-col min-w-[310px] mr-[1.25rem] hidden">
+              <img src="./image/static-content/static523.jpg" class="h-[165px] w-[165px] ml-[70px]" alt="img1">
+              <p class="text-[14.5px] text-wrap font-fam leading-[17px] mt-[3px]">Urban Wolf Tech Pouch: The All-in-One Waterproof Travel Organizer for Cables, Adapters, Chargers, ..</p>
+              <p><sup>₹</sup><span class="text-[1.25rem] font-semibold tracking-[1px]">799</span><sup>00</sup>         <span class="text-gray-500"><sub>M.R.P:   <del>₹1,149.00</del></sub></span></p>
+            </div>
+            <div class="box52 absolute flex flex-col min-w-[310px] mr-[1.25rem] hidden">
+              <img src="./image/static-content/static524.jpg" class="h-[165px] w-[165px] ml-[70px]" alt="img1">
+              <p class="text-[14.5px] text-wrap font-fam leading-[17px] mt-[3px]">Fugen Laptop Adapter Charger 65w 19v 3.33a Bluetip for HP 15-bs541tu, 15-bs541ur, 15-bs542...</p>
+              <p><sup>₹</sup><span class="text-[1.25rem] font-semibold tracking-[1px]">649</span><sup>00</sup>         <span class="text-gray-500"><sub>M.R.P:   <del>₹999.00</del></sub></span></p>
+            </div>
+          </div>
+          <div class="flex justify-around px-[10px] mt-64">
+            <div class="mini-box52 border border-gray-400 outline-[3px] outline-blue-700 rounded-[8px] h-[65px] w-[65px] hover:cursor-pointer">
+              <img
+                src="./image/static-content/static521.jpg"
+                alt="mini1"
+                class="w-[55px] h-[55px] rounded-[8px] mx-[5px] my-[5px]"
+              />
+            </div>
+            <div class="mini-box52 border border-gray-400 outline-[3px] outline-transparent rounded-[8px] h-[65px] w-[65px] hover:cursor-pointer">
+              <img
+                src="./image/static-content/static522.jpg"
+                alt="mini1"
+                class="w-[55px] h-[55px] rounded-[8px] mx-[4px] my-[4px]"
+              />
+            </div>
+            <div class="mini-box52 border border-gray-400 outline-[3px] outline-transparent rounded-[8px] h-[65px] w-[65px] hover:cursor-pointer">
+              <img
+                src="./image/static-content/static523.jpg"
+                alt="mini1"
+                class="w-[55px] h-[55px] rounded-[8px] mx-[4px] my-[4px]"
+              />
+            </div>
+            <div class="mini-box52 border border-gray-400 outline-[3px] outline-transparent rounded-[8px] h-[65px] w-[65px] hover:cursor-pointer">
+              <img
+                src="./image/static-content/static524.jpg"
+                alt="mini1"
+                class="w-[55px] h-[55px] rounded-[8px] mx-[4px] my-[4px]"
+              />
+            </div>
+          </div>
+          <a
+            href=""
+            class="decoration-none text-[13px] mt-[0.75rem] text-blue-700 font-semibold hover:text-blue-900"
+            >See more</a
+          >
+        </div>
+        <div class="box4-box">
+          <h2 class="text-[21px] font-bold leading-[28px]">
+            Up to 70% off | Unique products from Small Busines…
+          </h2>
+          <div class="mt-[8px] relative">
+            <div class="box53 absolute flex flex-col min-w-[310px] mr-[1.25rem]">
+              <img src="./image/static-content/static531.jpg" class="h-[165px] w-[165px] ml-[70px]" alt="img531">
+              <p class="text-[14.5px] text-wrap font-fam leading-[17px] mt-[3px]">SHILP KATHA Handicraft Leather Lamps for Home Decoration — Handmade Decorative Side Table D...</p>
+              <p><sup>₹</sup><span class="text-[1.25rem] font-semibold tracking-[1px]">1,696</span><sup>00</sup>         <span class="text-gray-500"><sub>M.R.P:   <del>₹2,400.00</del></sub></span></p>
+            </div>
+            <div class="box53 absolute flex flex-col min-w-[310px] mr-[1.25rem] hidden">
+              <img src="./image/static-content/static532.jpg" class="h-[165px] w-[165px] ml-[70px]" alt="img532">
+              <p class="text-[14.5px] text-wrap font-fam leading-[17px] mt-[3px]">SHILP KATHA Handmade Terracotta Scented Oil Burner Aroma Diffuser and Tealight Candleholder...</p>
+              <p><sup>₹</sup><span class="text-[1.25rem] font-semibold tracking-[1px]">596</span><sup>00</sup>         <span class="text-gray-500"><sub>M.R.P:   <del>₹2,000.00</del></sub></span></p>
+            </div>
+            <div class="box53 absolute flex flex-col min-w-[310px] mr-[1.25rem] hidden">
+              <img src="./image/static-content/static533.jpg" class="h-[165px] w-[165px] ml-[70px]" alt="img533">
+              <p class="text-[14.5px] text-wrap font-fam leading-[17px] mt-[3px]">Ashar Key Hub Gold Dust TPU Cover & Alloy Keychain for Mahindra Thar Roxx, 3XO, Marazzo, T...</p>
+              <p><sup>₹</sup><span class="text-[1.25rem] font-semibold tracking-[1px]">550</span><sup>00</sup>         <span class="text-gray-500"><sub>M.R.P:   <del>₹799.00</del></sub></span></p>
+            </div>
+            <div class="box53 absolute flex flex-col min-w-[310px] mr-[1.25rem] hidden">
+              <img src="./image/static-content/static534.jpg" class="h-[165px] w-[165px] ml-[70px]" alt="img534">
+              <p class="text-[14.5px] text-wrap font-fam leading-[17px] mt-[3px]">IAFA FURNITURE Ergolux Ergonomic Premium Office Chair | Mesh Desk Chair with Adjustable Armrests…</p>
+              <p><sup>₹</sup><span class="text-[1.25rem] font-semibold tracking-[1px]">4,999</span><sup>00</sup>         <span class="text-gray-500"><sub>M.R.P:   <del>₹24,999.00</del></sub></span></p>
+            </div>
+          </div>
+          <div class="flex justify-around px-[10px] mt-65">
+            <div class="mini-box53 border border-gray-400 outline-[3px] outline-blue-700 rounded-[8px] h-[65px] w-[65px] hover:cursor-pointer">
+              <img
+                src="./image/static-content/static531.jpg"
+                alt="mini1"
+                class="w-[55px] h-[55px] rounded-[8px] mx-[5px] my-[5px]"
+              />
+            </div>
+            <div class="mini-box53 border border-gray-400 outline-[3px] outline-transparent rounded-[8px] h-[65px] w-[65px] hover:cursor-pointer">
+              <img
+                src="./image/static-content/static532.jpg"
+                alt="mini1"
+                class="w-[55px] h-[55px] rounded-[8px] mx-[4px] my-[4px]"
+              />
+            </div>
+            <div class="mini-box53 border border-gray-400 outline-[3px] outline-transparent rounded-[8px] h-[65px] w-[65px] hover:cursor-pointer">
+              <img
+                src="./image/static-content/static533.jpg"
+                alt="mini1"
+                class="w-[55px] h-[55px] rounded-[8px] mx-[4px] my-[4px]"
+              />
+            </div>
+            <div class="mini-box53 border border-gray-400 outline-[3px] outline-transparent rounded-[8px] h-[65px] w-[65px] hover:cursor-pointer">
+              <img
+                src="./image/static-content/static534.jpg"
+                alt="mini1"
+                class="w-[55px] h-[55px] rounded-[8px] mx-[4px] my-[4px]"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="box4-box">
+          <h2 class="text-[21px] font-bold leading-[28px]">
+            Under ₹499 | Pocket-friendly fashion
+          </h2>
+          <div class="flex justify-between mt-3">
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static541.jpg"
+                alt="mini1"
+                class="w-[100%] h-25"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">Clothing</span>
+            </div>
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static542.jpg"
+                alt="mini1"
+                class="w-[100%] h-25"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">Backpacks</span>
+            </div>
+          </div>
+          <div class="flex justify-between mt-7">
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static543.jpg"
+                alt="mini1"
+                class="w-[100%] h-25"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">Footwear</span>
+            </div>
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static544.jpg"
+                alt="mini1"
+                class="w-[100%] h-25"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">View all</span>
+            </div>
+          </div>
+          <a
+            href=""
+            class="decoration-none text-[13px] mt-[30.125rem] text-blue-700 font-semibold hover:text-blue-900"
+            >See all offers</a
+          >
+        </div>
+      </div>
+      <!-- row6 box5 -->
+      <div class="box5-row p-5">
+        <h2 class="text-[21px] font-bold leading-[28px] mb-[5px] mr-[1.25rem]">
+          Up to 60% off | Curated kitchen products | Amazon Launchpad
+          <a
+            href=""
+            class="decoration-none ml-[10px] text-[15px] text-blue-700 font-semibold hover:decoration-1 hover:underline hover:text-blue-900"
+            >See all</a
+          >
+        </h2>
+        <!-- box-area -->
+        <div class="flex gap-x-[10px] h-[31.25rem] overflow-hidden">
+          <div class="slide-row6-box">
+            <a href="">
+              <img
+                src="./image/slide-content/slide61.jpg"
+                class="h-[200px] min-w-[170px] mr-[10px]"
+                alt="pic1"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide62.jpg"
+                class="h-[200px] min-w-[13.125rem] mx-[10px]"
+                alt="pic2"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide63.jpg"
+                class="h-[200px] min-w-[11.25rem] mx-[10px]"
+                alt="pic3"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide64.jpg"
+                class="h-[200px] min-w-[170px] mx-[10px]"
+                alt="pic4"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide65.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic5"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide66.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic6"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide67.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic7"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide68.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic8"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide69.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic9"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide610.jpg"
+                class="h-[200px] min-w-[13.125rem] mx-[15px]"
+                alt="pic10"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide611.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic11"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide612.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic12"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide613.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic13"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- row6 slide-arrow -->
+      <div
+        class="flex justify-between absolute h-[13.75rem] w-[97.3%] top-[290%] left-[1.4%] group"
+      >
+        <div class="slide-arrow-L" id="slide-arrow-L6">
+          <img
+            class="h-[100px] w-[3.125rem]"
+            src="./image/icons/row-left-arrow.svg"
+            alt="row-left-arrow-icon"
+          />
+        </div>
+        <div class="slide-arrow-R mr-[17px]" id="slide-arrow-R6">
+          <img
+            class="h-[100px] w-[3.125rem]"
+            src="./image/icons/row-right-arrow.svg"
+            alt="row-right-arrow-icon"
+          />
+        </div>
+      </div>
+      <!-- row7 box5 -->
+      <div class="box5-row p-5">
+        <h2 class="text-[21px] font-bold leading-[28px] mb-[5px] mr-[1.25rem]">
+          Petrol & electric vehicles from stores near you
+          <a
+            href=""
+            class="decoration-none ml-[10px] text-[15px] text-blue-700 font-semibold hover:decoration-1 hover:underline hover:text-blue-900"
+            >See all offers</a
+          >
+        </h2>
+        <!-- box-area -->
+        <div class="flex h-[31.25rem] overflow-hidden">
+          <div class="slide-row7-box">
+            <a href="">
+              <img
+                src="./image/slide-content/slide71.jpg"
+                class="h-[200px] min-w-[275px]"
+                alt="pic1"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide72.jpg"
+                class="h-[200px] min-w-[275px]"
+                alt="pic2"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide73.jpg"
+                class="h-[200px] min-w-[275px]"
+                alt="pic3"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide74.jpg"
+                class="h-[200px] min-w-[275px]"
+                alt="pic4"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide75.jpg"
+                class="h-[200px] min-w-[280px]"
+                alt="pic5"
+              />
+            </a>
+          </div>
+          <div class="slide-row7-box">
+            <a href="">
+              <img
+                src="./image/slide-content/slide76.jpg"
+                class="h-[200px] min-w-[275px]"
+                alt="pic6"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide77.jpg"
+                class="h-[200px] min-w-[275px]"
+                alt="pic7"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide78.jpg"
+                class="h-[200px] min-w-[275px]"
+                alt="pic8"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide79.jpg"
+                class="h-[200px] min-w-[275px]"
+                alt="pic9"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide710.jpg"
+                class="h-[200px] min-w-[280px]"
+                alt="pic10"
+              />
+            </a>
+          </div>
+          <div class="slide-row7-box">
+            <a href="">
+              <img
+                src="./image/slide-content/slide711.jpg"
+                class="h-[200px] min-w-[275px]"
+                alt="pic11"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide712.jpg"
+                class="h-[200px] min-w-[275px]"
+                alt="pic12"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide713.jpg"
+                class="h-[200px] min-w-[275px]"
+                alt="pic13"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide714.jpg"
+                class="h-[200px] min-w-[275px]"
+                alt="pic14"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide715.jpg"
+                class="h-[200px] min-w-[280px]"
+                alt="pic15"
+              />
+            </a>
+          </div>
+          <div class="slide-row7-box">
+            <a href="">
+              <img
+                src="./image/slide-content/slide716.jpg"
+                class="h-[200px] min-w-[275px]"
+                alt="pic16"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide717.jpg"
+                class="h-[200px] min-w-[275px]"
+                alt="pic17"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide718.jpg"
+                class="h-[200px] min-w-[275px]"
+                alt="pic18"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide719.jpg"
+                class="h-[200px] min-w-[275px]"
+                alt="pic19"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide720.jpg"
+                class="h-[200px] min-w-[280px]"
+                alt="pic20"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- row7 slide-arrow -->
+      <div
+        class="flex justify-between absolute h-[13.75rem] w-[97.3%] top-[336%] left-[1.4%] group"
+      >
+        <div class="slide-arrow-L" id="slide-arrow-L7">
+          <img
+            class="h-[100px] w-[3.125rem]"
+            src="./image/icons/row-left-arrow.svg"
+            alt="row-left-arrow-icon"
+          />
+        </div>
+        <div class="slide-arrow-R mr-[17px]" id="slide-arrow-R7">
+          <img
+            class="h-[100px] w-[3.125rem]"
+            src="./image/icons/row-right-arrow.svg"
+            alt="row-right-arrow-icon"
+          />
+        </div>
+      </div>
+      <!-- row8 box4 -->
+      <div class="box4-row">
+        <div class="box4-box">
+          <h2 class="text-[21px] font-bold leading-[28px]">
+            Top kitchen products fom Small businesses
+          </h2>
+          <div class="mt-[8px] relative">
+            <div class="box81 absolute flex flex-col min-w-[310px] mr-[1.25rem]">
+              <img src="./image/static-content/static811.jpg" class="h-[165px] w-[13.125rem] ml-[85px]" alt="img811">
+              <p class="text-[14.5px] text-wrap font-fam leading-[17px] mt-[3px]">Zulay Kitchen 6 Pcs Round Reusable Non-Stick air Fryer Accessories Silicone Coating Pot Basket(Mult…</p>
+              <p><sup>₹</sup><span class="text-[1.25rem] font-semibold tracking-[1px]">229</span><sup>00</sup>         <span class="text-gray-500"><sub>M.R.P:   <del>₹499.00</del></sub></span></p>
+            </div>
+            <div class="box81 absolute flex flex-col min-w-[310px] mr-[1.25rem] hidden">
+              <img src="./image/static-content/static812.jpg" class="h-[165px] w-[80px] ml-[115px]" alt="img812">
+              <p class="text-[14.5px] text-wrap font-fam leading-[17px] mt-[3px]">Shinzo Polyester Enterprises Top Load Washing Machine Cover Fit And Suitable Compatible With I…</p>
+              <p><sup>₹</sup><span class="text-[1.25rem] font-semibold tracking-[1px]">239</span><sup>00</sup>         <span class="text-gray-500"><sub>M.R.P:   <del>₹599.00</del></sub></span></p>
+            </div>
+            <div class="box81 absolute flex flex-col min-w-[310px] mr-[1.25rem] hidden">
+              <img src="./image/static-content/static813.jpg" class="h-[165px] w-[165px] ml-[70px]" alt="img813">
+              <p class="text-[14.5px] text-wrap font-fam leading-[17px] mt-[3px]">BLUE MAX Universal Steam Iron white Teflon Shoe Cover - Used in Every Iron for Heat Protection, Qui…</p>
+              <p><sup>₹</sup><span class="text-[1.25rem] font-semibold tracking-[1px]">249</span><sup>00</sup>         <span class="text-gray-500"><sub>M.R.P:   <del>₹1.020.00</del></sub></span></p>
+            </div>
+            <div class="box81 absolute flex flex-col min-w-[310px] mr-[1.25rem] hidden">
+              <img src="./image/static-content/static814.jpg" class="h-[165px] w-[23.125rem] ml-[30px]" alt="img814">
+              <p class="text-[14.5px] text-wrap font-fam leading-[17px] mt-[3px]">BIGIMALL Acrylic sheet 3mm Transparent 6"x6" Pack of 4 pcs for glass painting High Gloss (3mm, 6x6,…</p>
+              <p><sup>₹</sup><span class="text-[1.25rem] font-semibold tracking-[1px]">260</span><sup>93</sup>         <span class="text-gray-500"><sub>M.R.P:   <del>₹750.00</del></sub></span></p>
+            </div>
+          </div>
+          <div class="flex justify-around px-[10px] mt-65">
+            <div class="mini-box81 border border-gray-400 outline-[3px] outline-blue-700 rounded-[8px] h-[65px] w-[65px] hover:cursor-pointer">
+              <img
+                src="./image/static-content/static811.jpg"
+                alt="mini1"
+                class="w-[55px] h-[55px] rounded-[8px] mx-[5px] my-[5px]"
+              />
+            </div>
+            <div class="mini-box81 border border-gray-400 outline-[3px] outline-transparent rounded-[8px] h-[65px] w-[65px] hover:cursor-pointer">
+              <img
+                src="./image/static-content/static812.jpg"
+                alt="mini1"
+                class="w-[1.25rem] h-[55px] rounded-[8px] mx-[21px] my-[4px]"
+              />
+            </div>
+            <div class="mini-box81 border border-gray-400 outline-[3px] outline-transparent rounded-[8px] h-[65px] w-[65px] hover:cursor-pointer">
+              <img
+                src="./image/static-content/static813.jpg"
+                alt="mini1"
+                class="w-[55px] h-[55px] rounded-[8px] mx-[4px] my-[4px]"
+              />
+            </div>
+            <div class="mini-box81 border border-gray-400 outline-[3px] outline-transparent rounded-[8px] h-[65px] w-[65px] hover:cursor-pointer">
+              <img
+                src="./image/static-content/static814.jpg"
+                alt="mini1"
+                class="w-[55px] h-[2.5rem] rounded-[8px] mx-[4px] my-[10px]"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="box4-box">
+          <h2 class="text-[21px] font-bold leading-[28px]">
+            Best Sellers in Sports, Fitness & Outdoors
+          </h2>
+          <div class="flex justify-between mt-3">
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static821.jpg"
+                alt="mini1"
+                class="w-[100%] h-[90%]"
+              />
+            </div>
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static822.jpg"
+                alt="mini1"
+                class="w-[100%] h-[90%]"
+              />
+            </div>
+          </div>
+          <div class="flex justify-between mt-7">
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static823.jpg"
+                alt="mini1"
+                class="w-[100%] h-[90%]"
+              />
+            </div>
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static824.jpg"
+                alt="mini1"
+                class="w-[100%] h-[90%]"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="box4-box">
+          <h2 class="text-[21px] font-bold leading-[28px]">
+            Up to 60% off | Best selling appliances from stores near…
+          </h2>
+          <div class="mt-[8px] relative">
+            <div class="box83 absolute flex flex-col min-w-[310px] mr-[1.25rem]">
+              <img src="./image/static-content/static831.jpg" class="h-[165px] w-[90px] ml-[110px]" alt="img831">
+              <p class="text-[14.5px] text-wrap font-fam leading-[17px] mt-[3px]">Voltas Beko ‘A TATA Product’ 173 L 3 star Made-In-India Direct Cool Refrigerator (RDC205C / S0PBE0…</p>
+              <p><sup>₹</sup><span class="text-[1.25rem] font-semibold tracking-[1px]">13,290</span>        <span class="text-gray-500"><sub>M.R.P:   <del>₹23,990.00</del></sub></span></p>
+            </div>
+            <div class="box83 absolute flex flex-col min-w-[310px] mr-[1.25rem] hidden">
+              <img src="./image/static-content/static832.jpg" class="h-[165px] w-[90px] ml-[110px]" alt="img832">
+              <p class="text-[14.5px] text-wrap font-fam leading-[17px] mt-[3px]">Samsung 322L 2 Star Inverter Frost-Free Convertible 5 In 1 Double Door Refrigerator Appliance (RT37C…</p>
+              <p><sup>₹</sup><span class="text-[1.25rem] font-semibold tracking-[1px]">40,890</span>        <span class="text-gray-500"><sub>M.R.P:   <del>₹54,990.00</del></sub></span></p>
+            </div>
+            <div class="box83 absolute flex flex-col min-w-[310px] mr-[1.25rem] hidden">
+              <img src="./image/static-content/static833.jpg" class="h-[165px] w-[110px] ml-[100px]" alt="img833">
+              <p class="text-[14.5px] text-wrap font-fam leading-[17px] mt-[3px]">Haier 598 L, 3 Star, 83% Convertible Fridge Space, Expert Inverter, Frost Free, Side by Side Refrigerat…</p>
+              <p><sup>₹</sup><span class="text-[1.25rem] font-semibold tracking-[1px]">80,490</span>         <span class="text-gray-500"><sub>M.R.P:   <del>₹1,30,990.00</del></sub></span></p>
+            </div>
+            <div class="box83 absolute flex flex-col min-w-[310px] mr-[1.25rem] hidden">
+              <img src="./image/static-content/static834.jpg" class="h-[165px] w-[90px] ml-[110px]" alt="img834">
+              <p class="text-[14.5px] text-wrap font-fam leading-[17px] mt-[3px]">Godrej 180 L 5 Star Turbo Cooling Technology, 24 Days Farm Freshness Direct Cool Single Door Refri…</p>
+              <p><sup>₹</sup><span class="text-[1.25rem] font-semibold tracking-[1px]">15,990</span>        <span class="text-gray-500"><sub>M.R.P:   <del>₹26,990.00</del></sub></span></p>
+            </div>
+          </div>
+          <div class="flex justify-around px-[10px] mt-65">
+            <div class="mini-box83 border border-gray-400 outline-[3px] outline-blue-700 rounded-[8px] h-[65px] w-[65px] hover:cursor-pointer">
+              <img
+                src="./image/static-content/static831.jpg"
+                alt="mini1"
+                class="w-[30px] h-[55px] mx-[17px] my-[5px]"
+              />
+            </div>
+            <div class="mini-box83 border border-gray-400 outline-[3px] outline-transparent rounded-[8px] h-[65px] w-[65px] hover:cursor-pointer">
+              <img
+                src="./image/static-content/static832.jpg"
+                alt="mini1"
+                class="w-[30px] h-[55px] mx-[17px] my-[4px]"
+              />
+            </div>
+            <div class="mini-box83 border border-gray-400 outline-[3px] outline-transparent rounded-[8px] h-[65px] w-[65px] hover:cursor-pointer">
+              <img
+                src="./image/static-content/static833.jpg"
+                alt="mini1"
+                class="w-[30px] h-[55px] mx-[17px] my-[4px]"
+              />
+            </div>
+            <div class="mini-box83 border border-gray-400 outline-[3px] outline-transparent rounded-[8px] h-[65px] w-[65px] hover:cursor-pointer">
+              <img
+                src="./image/static-content/static834.jpg"
+                alt="mini1"
+                class="w-[30px] h-[55px] mx-[17px] my-[4px]"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="box4-box">
+          <h2 class="text-[21px] font-bold leading-[28px]">
+            Up to 60% off | Curated products from women-led b…
+          </h2>
+          <div class="mt-[8px] relative">
+            <div class="box84 absolute flex flex-col min-w-[310px] mr-[1.25rem]">
+              <img src="./image/static-content/static841.jpg" class="h-[165px] w-[165px] ml-[70px]" alt="img841">
+              <p class="text-[14.5px] text-wrap font-fam leading-[17px] mt-[3px]">Sanvatsar Metal Incense Burner Butterfly Loban Dani Dhoop Dani Aarti Metal Loban Dhoop Dani/D…</p>
+              <p><sup>₹</sup><span class="text-[1.25rem] font-semibold tracking-[1px]">490</span><sup>00</sup>        <span class="text-gray-500"><sub>M.R.P:   <del>₹1,999.00</del></sub></span></p>
+            </div>
+            <div class="box84 absolute flex flex-col min-w-[310px] mr-[1.25rem] hidden">
+              <img src="./image/static-content/static842.jpg" class="h-[165px] w-[165px] ml-[70px]" alt="img842">
+              <p class="text-[14.5px] text-wrap font-fam leading-[17px] mt-[3px]">Astitva Premium Cotton 60 Inch Circular Table Cloth | Green Lotus Print Round 4 Seater Table Cover wi…</p>
+              <p><sup>₹</sup><span class="text-[1.25rem] font-semibold tracking-[1px]">1,178</span><sup>00</sup>        <span class="text-gray-500"><sub>M.R.P:   <del>₹1,999.00</del></sub></span></p>
+            </div>
+            <div class="box84 absolute flex flex-col min-w-[310px] mr-[1.25rem] hidden">
+              <img src="./image/static-content/static843.jpg" class="h-[165px] w-[165px] ml-[70px]" alt="img843">
+              <p class="text-[14.5px] text-wrap font-fam leading-[17px] mt-[3px]">Sanvatsar Home Decorative Diya Set of 10 | Corporate Gift | Diwali Gift Diya | Deepak | Candle…</p>
+              <p><sup>₹</sup><span class="text-[1.25rem] font-semibold tracking-[1px]">650</span><sup>00</sup>         <span class="text-gray-500"><sub>M.R.P:   <del>₹999.00</del></sub></span></p>
+            </div>
+            <div class="box84 absolute flex flex-col min-w-[310px] mr-[1.25rem] hidden">
+              <img src="./image/static-content/static844.jpg" class="h-[165px] w-[165px] ml-[70px]" alt="img844">
+              <p class="text-[14.5px] text-wrap font-fam leading-[17px] mt-[3px]">Astitva Wall Plates, Set of 3Pcs of MDF Wall Plates For Home Decoration, Living Room, Bedroom, Offi…</p>
+              <p><sup>₹</sup><span class="text-[1.25rem] font-semibold tracking-[1px]">1,390</span><sup>00</sup>        <span class="text-gray-500"><sub>M.R.P:   <del>₹2,490.00</del></sub></span></p>
+            </div>
+          </div>
+          <div class="flex justify-around px-[10px] mt-65">
+            <div class="mini-box84 border border-gray-400 outline-[3px] outline-blue-700 rounded-[8px] h-[65px] w-[65px] hover:cursor-pointer">
+              <img
+                src="./image/static-content/static841.jpg"
+                alt="mini1"
+                class="w-[55px] h-[55px] rounded-[8px] mx-[4px] my-[4px]"
+              />
+            </div>
+            <div class="mini-box84 border border-gray-400 outline-[3px] outline-transparent rounded-[8px] h-[65px] w-[65px] hover:cursor-pointer">
+              <img
+                src="./image/static-content/static842.jpg"
+                alt="mini1"
+                class="w-[55px] h-[55px] rounded-[8px] mx-[4px] my-[4px]"
+              />
+            </div>
+            <div class="mini-box84 border border-gray-400 outline-[3px] outline-transparent rounded-[8px] h-[65px] w-[65px] hover:cursor-pointer">
+              <img
+                src="./image/static-content/static843.jpg"
+                alt="mini1"
+                class="w-[55px] h-[55px] rounded-[8px] mx-[4px] my-[4px]"
+              />
+            </div>
+            <div class="mini-box84 border border-gray-400 outline-[3px] outline-transparent rounded-[8px] h-[65px] w-[65px] hover:cursor-pointer">
+              <img
+                src="./image/static-content/static844.jpg"
+                alt="mini1"
+                class="w-[55px] h-[55px] rounded-[8px] mx-[4px] my-[4px]"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- row9 box5 -->
+      <div class="box5-row p-5">
+        <h2 class="text-[21px] font-bold leading-[28px] mb-[5px] mr-[1.25rem]">
+          Up to 80% off | Handpicked products from Small businesses
+          <a
+            href=""
+            class="decoration-none ml-[10px] text-[15px] text-blue-700 font-semibold hover:decoration-1 hover:underline hover:text-blue-900"
+            >See more</a
+          >
+        </h2>
+        <!-- box-area -->
+        <div class="flex gap-x-[10px] h-[31.25rem] overflow-hidden">
+          <div class="slide-row9-box">
+            <a href="">
+              <img
+                src="./image/slide-content/slide31.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic1"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide32.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic2"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide33.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic3"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide34.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic4"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide35.jpg"
+                class="h-[200px] min-w-[115px] mx-[15px]"
+                alt="pic5"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide36.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic6"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide37.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic7"
+              />
+            </a>
+          </div>
+          <div class="slide-row9-box">
+            <a href="">
+              <img
+                src="./image/slide-content/slide38.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic8"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide39.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic9"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide310.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic10"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide311.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic11"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide312.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic12"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide313.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic13"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide314.jpg"
+                class="h-[200px] min-w-[11.25rem] mx-[15px]"
+                alt="pic14"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- row9 slide-arrow -->
+      <div
+        class="flex justify-between absolute h-[13.75rem] w-[97.3%] top-[444%] left-[1.2%] group"
+      >
+        <div class="slide-arrow-L" id="slide-arrow-L9">
+          <img
+            class="h-[100px] w-[3.125rem]"
+            src="./image/icons/row-left-arrow.svg"
+            alt="row-left-arrow-icon"
+          />
+        </div>
+        <div class="slide-arrow-R mr-[17px]" id="slide-arrow-R9">
+          <img
+            class="h-[100px] w-[3.125rem]"
+            src="./image/icons/row-right-arrow.svg"
+            alt="row-right-arrow-icon"
+          />
+        </div>
+      </div>
+      <!-- row10 box4 -->
+      <div class="box4-row">
+        <div class="box4-box">
+          <h2 class="text-[21px] font-bold leading-[28px]">
+            Min. 40% off | Fun toys for little ones | Amazon brands
+          </h2>
+          <div class="flex justify-between mt-3">
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static10-21.jpg"
+                alt="mini1"
+                class="w-[100%] h-25"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">Min. 50% off | Soft toys</span>
+            </div>
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static10-22.jpg"
+                alt="mini1"
+                class="w-[100%] h-25"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">Min. 40% off | Indoor games</span>
+            </div>
+          </div>
+          <div class="flex justify-between mt-2">
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static10-23.jpg"
+                alt="mini1"
+                class="w-[100%] h-25"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">Min. 40% off | Learning toys</span>
+            </div>
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static10-24.jpg"
+                alt="mini1"
+                class="w-[100%] h-25"
+              />
+              <span class="text-[0.8rem] -mt-[0.125rem]">Min. 40% off | Ride-ons & outdoors</span>
+            </div>
+          </div>
+          <a
+            href=""
+            class="decoration-none text-[13px] mt-[13px] text-blue-700 font-semibold hover:text-blue-900"
+            >See all offers</a
+          >
+        </div>
+        <div class="box4-box bg-gray-200"></div>
+        <div class="box4-box">
+          <h2 class="text-[21px] font-bold leading-[28px]">
+            Under ₹799 | Combo packs from Amazon brands
+          </h2>
+          <div class="mt-5">
+            <img
+                src="./image/static-content/static10-3.jpg"
+                alt="mini1"
+                class="w-[100%] h-[100%]"
+              />
+          </div>
+          <a
+            href=""
+            class="decoration-none text-[13px] mt-[34px] text-blue-700 font-semibold hover:text-blue-900"
+            >See all offers</a
+          >
+        </div>
+        <div class="box4-box">
+          <h2 class="text-[21px] font-bold leading-[28px]">
+            Customers’ Most-Loved products
+          </h2>
+          <div class="flex justify-between mt-3">
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static10-41.jpg"
+                alt="mini1"
+                class="w-[100%] h-28"
+              />
+            </div>
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static10-42.jpg"
+                alt="mini1"
+                class="w-[100%] h-28"
+              />
+            </div>
+          </div>
+          <div class="flex justify-between mt-7">
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static10-43.jpg"
+                alt="mini1"
+                class="w-[100%] h-28"
+              />
+            </div>
+            <div class="flex flex-col w-37">
+              <img
+                src="./image/static-content/static10-44.jpg"
+                alt="mini1"
+                class="w-[100%] h-28"
+              />
+            </div>
+          </div>
+          <a
+            href=""
+            class="decoration-none text-[13px] mt-[34px] text-blue-700 font-semibold hover:text-blue-900"
+            >Explore more</a
+          >
+        </div>
+      </div>
+      <!-- row11 box5 -->
+      <div class="box5-row p-5">
+        <h2 class="text-[21px] font-bold leading-[28px] mb-[5px] mr-[1.25rem]">
+          Up to 75% off | A wide range of electronics & accessories from Small
+          businesses
+          <a
+            href=""
+            class="decoration-none ml-[10px] text-[15px] text-blue-700 font-semibold hover:decoration-1 hover:underline hover:text-blue-900"
+            >See more</a
+          >
+        </h2>
+        <!-- box-area -->
+        <div class="flex gap-x-[10px] h-[31.25rem] overflow-hidden">
+          <div class="slide-row11-box">
+            <a href="">
+              <img
+                src="./image/slide-content/slide11-1.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic1"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide11-2.jpg"
+                class="h-[13.125rem] min-w-[300px] mt-[2.5rem]"
+                alt="pic2"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide11-3.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic3"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide11-4.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic4"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide11-5.jpg"
+                class="h-[200px] min-w-[13.125rem]"
+                alt="pic5"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide11-6.jpg"
+                class="h-[200px] min-w-[21.25rem]"
+                alt="pic6"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide11-7.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic7"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide11-8.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic8"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide11-9.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic9"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide11-10.jpg"
+                class="h-[200px] min-w-[23.125rem]"
+                alt="pic10"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide11-11.jpg"
+                class="h-[200px] min-w-[130px]"
+                alt="pic11"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide11-12.jpg"
+                class="h-[11.25rem] min-w-[23.125rem] mt-[2.5rem]"
+                alt="pic12"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide11-13.jpg"
+                class="h-[200px] min-w-[13.125rem]"
+                alt="pic13"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide11-14.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic14"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide11-15.jpg"
+                class="h-[200px] min-w-[200px]"
+                alt="pic15"
+              />
+            </a>
+            <a href="">
+              <img
+                src="./image/slide-content/slide11-16.jpg"
+                class="h-[200px] min-w-[13.125rem]"
+                alt="pic16"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- row11 slide-arrow -->
+      <div
+        class="flex justify-between absolute h-[13.75rem] w-[97.3%] top-[553%] left-[1.4%] group "
+      >
+        <div class="slide-arrow-L" id="slide-arrow-L11">
+          <img
+            class="h-[100px] w-[3.125rem]"
+            src="./image/icons/row-left-arrow.svg"
+            alt="row-left-arrow-icon"
+          />
+        </div>
+        <div class="slide-arrow-R mr-[17px]" id="slide-arrow-R11">
+          <img
+            class="h-[100px] w-[3.125rem]"
+            src="./image/icons/row-right-arrow.svg"
+            alt="row-right-arrow-icon"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Recommendation-Area -->
+    <section
+      class="absolute h-[170px] w-[100%] py-[20px] top-[641%] bg-white shadow-black"
+    >
+      <hr class="text-gray-300"/>
+      <div class="py-[10px] -pb-[4px]">
+        <p class="text-[26px] text-center font-fam font-bold mt-[3px] mb-[7px]">
+          See personalized recommendations
+        </p>
+        <a
+          href=""
+          class="block text-[13px] text-center w-[22.5rem] m-auto py-[5.5px] rounded-[30px] bg-yellow-300 hover:bg-yellow-400"
+          >Sign in</a
+        >
+        <span class="block text-[11px] py-[3px] mb-[4px] text-center">
+          New customer?
+          <a class="text-blue-700 underline hover:text-red-700" href=""
+            >Start here.</a
+          >
+        </span>
+      </div>
+      <hr class="text-gray-300" />
+    </section>
+
+    <!-- Overlay-Section -->
+    <section class="overlay hidden"></section>
+
+    <!-- Footer-Section -->
+    <footer id="footer-data" class="w-[100%] absolute top-[669%]"></footer>
+
+    <script src="./src/script.js"></script>
+  </body>
+</html>
